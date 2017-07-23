@@ -1,0 +1,79 @@
+/* Main */
+
+body {
+	margin: 0 auto;
+	background-color: gainsboro;
+}
+
+header h1 {
+	padding: 30px 0 30px;
+	text-align: center;
+	margin: 0 0 40px;
+	background-color: lightskyblue;
+	color: slategray;
+	border: 5px solid slategray;
+
+}
+
+/* Info */
+
+.info {
+    text-align: center;
+}
+
+.form {
+    width: 50%;
+	margin-left: 100px;
+	float: left;
+}
+
+label {
+	display: block;
+	color: seagreen;
+	font-family: 'Indie Flower', cursive;
+}
+
+input {
+	text-align: center;
+	background-color: azure;
+	border-radius: 6px;
+	margin-bottom: 10px;
+}
+
+.buttons {
+	margin-top: 10px;
+    padding-top: 1em;
+    text-align: center;
+
+}
+
+button {
+	height: 2em;
+	border-radius: 6px;
+	margin-bottom: 20px;
+	margin-right: 5px;
+	outline: none;
+}
+
+button:hover {
+	background-color: lightskyblue;
+}
+
+#deleteInfo {
+	font-size: 20px;
+	color: seagreen;
+	font-family: 'Indie Flower', cursive;
+}
+
+/* Show */
+
+#show {
+	color: midnightblue;
+	font-family: 'Poiret One', cursive;
+	float: right;
+	margin-right: 200px;
+}
+
+.client {
+	margin-bottom: 50px;
+}
