@@ -104,6 +104,7 @@ class ClientInfoForm extends React.Component {
 
     handleDelete() {
         this.props.delete(this.state.humanName);
+        this.setState({humanName: ''});
     }
 
     render() {

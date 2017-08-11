@@ -9857,62 +9857,47 @@ function Display(props) {
     );
 }
 
-var Buttons = function (_React$Component) {
-    _inherits(Buttons, _React$Component);
+function Buttons(props) {
+    return _react2.default.createElement(
+        "div",
+        { className: "buttons" },
+        _react2.default.createElement(
+            "button",
+            { id: "enter", type: "submit" },
+            "add client"
+        ),
+        _react2.default.createElement(
+            "button",
+            { id: "deleteClient", type: "button", onClick: props.onDelete },
+            "delete client"
+        ),
+        _react2.default.createElement(
+            "p",
+            { id: "deleteInfo" },
+            "Use human name to delete client"
+        )
+    );
+}
 
-    function Buttons(props) {
-        _classCallCheck(this, Buttons);
-
-        return _possibleConstructorReturn(this, (Buttons.__proto__ || Object.getPrototypeOf(Buttons)).call(this, props));
-    }
-
-    _createClass(Buttons, [{
-        key: "render",
-        value: function render() {
-            return _react2.default.createElement(
-                "div",
-                { className: "buttons" },
-                _react2.default.createElement(
-                    "button",
-                    { id: "enter", type: "submit" },
-                    "add client"
-                ),
-                _react2.default.createElement(
-                    "button",
-                    { id: "deleteClient", type: "button", onClick: this.props.onDelete },
-                    "delete client"
-                ),
-                _react2.default.createElement(
-                    "p",
-                    { id: "deleteInfo" },
-                    "Use human name to delete client"
-                )
-            );
-        }
-    }]);
-
-    return Buttons;
-}(_react2.default.Component);
-
-var ClientInfoForm = function (_React$Component2) {
-    _inherits(ClientInfoForm, _React$Component2);
+var ClientInfoForm = function (_React$Component) {
+    _inherits(ClientInfoForm, _React$Component);
 
     function ClientInfoForm(props) {
         _classCallCheck(this, ClientInfoForm);
 
-        var _this2 = _possibleConstructorReturn(this, (ClientInfoForm.__proto__ || Object.getPrototypeOf(ClientInfoForm)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (ClientInfoForm.__proto__ || Object.getPrototypeOf(ClientInfoForm)).call(this, props));
 
-        _this2.state = { dogName: '',
+        _this.state = { dogName: '',
             humanName: '',
             address: '',
             email: '',
             phone: ''
         };
 
-        _this2.handleInputChange = _this2.handleInputChange.bind(_this2);
-        _this2.handleSubmit = _this2.handleSubmit.bind(_this2);
-        _this2.handleDelete = _this2.handleDelete.bind(_this2);
-        return _this2;
+        _this.handleInputChange = _this.handleInputChange.bind(_this);
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
+        _this.handleDelete = _this.handleDelete.bind(_this);
+        return _this;
     }
 
     _createClass(ClientInfoForm, [{
@@ -9952,6 +9937,7 @@ var ClientInfoForm = function (_React$Component2) {
         key: "handleDelete",
         value: function handleDelete() {
             this.props.delete(this.state.humanName);
+            this.setState({ humanName: '' });
         }
     }, {
         key: "render",
@@ -10006,19 +9992,19 @@ var ClientInfoForm = function (_React$Component2) {
     return ClientInfoForm;
 }(_react2.default.Component);
 
-var App = function (_React$Component3) {
-    _inherits(App, _React$Component3);
+var App = function (_React$Component2) {
+    _inherits(App, _React$Component2);
 
     function App(props) {
         _classCallCheck(this, App);
 
-        var _this3 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+        var _this2 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-        _this3.state = { clients: Clients };
+        _this2.state = { clients: Clients };
 
-        _this3.onClientAdd = _this3.onClientAdd.bind(_this3);
-        _this3.onClientDelete = _this3.onClientDelete.bind(_this3);
-        return _this3;
+        _this2.onClientAdd = _this2.onClientAdd.bind(_this2);
+        _this2.onClientDelete = _this2.onClientDelete.bind(_this2);
+        return _this2;
     }
 
     _createClass(App, [{
@@ -10032,7 +10018,6 @@ var App = function (_React$Component3) {
         value: function onClientDelete(clientName) {
             this.state.clients.forEach(function (client, index) {
                 if (clientName === client.humanName) {
-                    console.log(client, index);
                     this.state.clients.splice(index, 1);
                     this.setState(this.state);
                 }
