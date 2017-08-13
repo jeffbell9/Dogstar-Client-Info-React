@@ -14,6 +14,14 @@ app.use(parser.json());
 
 app.use('/api',router);
 
+app.all('*',function(req,res,next){
+	if(req.headers['x-forwarded-proto']!='https') {
+	  res.redirect(`https://localhost:${port}`+req.url);
+	} else {
+	  next();
+	}
+})
+
 app.listen(port, function() {
 	console.log(`The server is running on port ${port} !`);
 });
