@@ -1,17 +1,5 @@
 import React from 'react';
-
-let Clients = [
-    {
-        dogName: "Luke",
-        humanName: "Jeff",
-        address: "3805 SW Admiral Way",
-        email: "human@gmail.com",
-        phone: "206-555-1234",
-        id: 1
-    }
-];
-
-let nextId = 2;
+import axios from 'axios';
 
 function Client(props) {
     return (
@@ -36,7 +24,7 @@ function Display(props) {
                             address = {client.address}
                             email = {client.email}
                             phone = {client.phone}
-                            key = {client.id} />
+                            key = {client._id} />
                     )
                 }.bind(this))}
             </div>
@@ -87,11 +75,8 @@ class ClientInfoForm extends React.Component {
             humanName: this.state.humanName,
             address: this.state.address,
             email: this.state.email,
-            phone: this.state.phone,
-            id: nextId
+            phone: this.state.phone
         };
-
-        nextId += 1;
 
         this.props.add(newClient);
         this.setState({ dogName: '',
@@ -139,24 +124,42 @@ class ClientInfoForm extends React.Component {
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { clients: Clients };
+        this.state = { clients: [] };
 
         this.onClientAdd = this.onClientAdd.bind(this);
-         this.onClientDelete = this.onClientDelete.bind(this);
+        this.onClientDelete = this.onClientDelete.bind(this);
+        this.loadClients = this.loadClients.bind(this);
+    }
+
+    loadClients() {
+        axios.get(this.props.url)
+        .then(res => {
+            this.setState({clients: res.data.clients});
+        })
+    }
+
+    componentDidMount() {
+        this.loadClients();
     }
 
     onClientAdd(client) {
-        this.state.clients.push(client);
-        this.setState(this.state);
+        axios.post(this.props.url, client)
+        .then(res => {
+            this.loadClients();
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     onClientDelete(clientName) {
-        this.state.clients.forEach(function(client, index) {
-            if(clientName === client.humanName) {
-                this.state.clients.splice(index, 1);
-                this.setState(this.state);
-            }
-        }.bind(this));
+        axios.delete(this.props.url + '/' + clientName)
+        .then(res => {
+            this.loadClients();
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     render() {

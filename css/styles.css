@@ -70,8 +70,8 @@ button:hover {
 #show {
 	color: midnightblue;
 	font-family: 'Poiret One', cursive;
-	float: right;
-	margin-right: 200px;
+	/*float: right;*/
+	margin-right: 0px;
 }
 
 .client {
