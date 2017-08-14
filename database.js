@@ -9,5 +9,3 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/client-info', e
         console.log("Successfully connected to Mongo!");
     }
 });
-
-

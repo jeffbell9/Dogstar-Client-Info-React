@@ -1,3 +1,5 @@
+const fs = require('fs');
+const https = require('https');
 const path = require('path');
 const express = require('express');
 const app = express();
@@ -14,14 +16,9 @@ app.use(parser.json());
 
 app.use('/api',router);
 
-app.all('*',function(req,res,next){
-	if(req.headers['x-forwarded-proto']!='https') {
-	  res.redirect(`https://localhost:${port}`+req.url);
-	} else {
-	  next();
-	}
-})
-
-app.listen(port, function() {
-	console.log(`The server is running on port ${port} !`);
+https.createServer({
+	key: fs.readFileSync('key.pem'),
+	cert: fs.readFileSync('cert.pem')
+  }, app).listen(port, () => {
+	  console.log(`The server is running on port ${port} !`);
 });
