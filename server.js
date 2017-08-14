@@ -24,13 +24,13 @@ app.all('*',function(req,res,next){
 
 app.use('/api',router);
 
-/*https.createServer({
+https.createServer({
 	key: fs.readFileSync('key.pem'),
 	cert: fs.readFileSync('cert.pem')
   }, app).listen(port, () => {
 	  console.log(`The server is running on port ${port} !`);
-});*/
-
-app.listen(port, () => {
-	console.log(`The server is running on port ${port} !`);
 });
+
+/*app.listen(port, () => {
+	console.log(`The server is running on port ${port} !`);
+});*/
