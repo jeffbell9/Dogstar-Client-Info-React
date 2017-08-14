@@ -8,4 +8,4 @@ import './css/styles.css';
 let port = process.env.PORT || 8080;
 
 
-ReactDOM.render(<App url={"http://localhost:" + port + "/api/clients"} />, document.getElementById('container'));
+ReactDOM.render(<App url={"https://localhost:" + port + "/api/clients"} />, document.getElementById('container'));
