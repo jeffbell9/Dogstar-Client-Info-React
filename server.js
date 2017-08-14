@@ -15,10 +15,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(parser.json());
 
 app.all('*',function(req,res,next){
-	if(req.headers['x-forwarded-proto']!='https') {
-	  res.redirect(`https://${req.hostname}${req.url}`);
+	if(req.headers['x-forwarded-proto']!=='https') {
+	  return res.redirect(`https://${req.hostname}${req.url}`);
 	} else {
-	  next();
+	  return next();
 	}
 });
 
