@@ -14,15 +14,23 @@ let port = process.env.PORT || 8080;
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(parser.json());
 
+app.all('*',function(req,res,next){
+	if(req.headers['x-forwarded-proto']!='https') {
+	  res.redirect(`https://${req.hostname}${req.url}`);
+	} else {
+	  next();
+	}
+});
+
 app.use('/api',router);
 
-/*https.createServer({
+https.createServer({
 	key: fs.readFileSync('key.pem'),
 	cert: fs.readFileSync('cert.pem')
   }, app).listen(port, () => {
 	  console.log(`The server is running on port ${port} !`);
-});*/
-
-app.listen(port, () => {
-	console.log(`The server is running on port ${port} !`);
 });
+
+/*app.listen(port, () => {
+	console.log(`The server is running on port ${port} !`);
+});*/
