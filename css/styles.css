@@ -72,6 +72,7 @@ button:hover {
 	font-family: 'Poiret One', cursive;
 	/*float: right;*/
 	margin-right: 0px;
+	overflow: hidden;
 }
 
 .client {
