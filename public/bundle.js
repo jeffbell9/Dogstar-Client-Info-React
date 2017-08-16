@@ -10586,21 +10586,25 @@ var ClientInfoForm = function (_React$Component) {
         value: function handleSubmit(event) {
             event.preventDefault();
 
-            var newClient = {
-                dogName: this.state.dogName,
-                humanName: this.state.humanName,
-                address: this.state.address,
-                email: this.state.email,
-                phone: this.state.phone
-            };
+            if (this.state.humanName.length > 0) {
+                var newClient = {
+                    dogName: this.state.dogName,
+                    humanName: this.state.humanName,
+                    address: this.state.address,
+                    email: this.state.email,
+                    phone: this.state.phone
+                };
 
-            this.props.add(newClient);
-            this.setState({ dogName: '',
-                humanName: '',
-                address: '',
-                email: '',
-                phone: ''
-            });
+                this.props.add(newClient);
+                this.setState({ dogName: '',
+                    humanName: '',
+                    address: '',
+                    email: '',
+                    phone: ''
+                });
+            } else {
+                alert("human name and dog name are required");
+            }
         }
     }, {
         key: 'handleDelete',

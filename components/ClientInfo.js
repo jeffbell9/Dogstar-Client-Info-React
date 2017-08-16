@@ -70,21 +70,25 @@ class ClientInfoForm extends React.Component {
      handleSubmit(event) {
         event.preventDefault();
 
-        let newClient = {
-            dogName: this.state.dogName,
-            humanName: this.state.humanName,
-            address: this.state.address,
-            email: this.state.email,
-            phone: this.state.phone
-        };
+        if (this.state.humanName.length > 0) {
+            let newClient = {
+                dogName: this.state.dogName,
+                humanName: this.state.humanName,
+                address: this.state.address,
+                email: this.state.email,
+                phone: this.state.phone
+            };
 
-        this.props.add(newClient);
-        this.setState({ dogName: '',
-                        humanName: '',
-                        address: '',
-                        email: '',
-                        phone: ''
-        });
+            this.props.add(newClient);
+            this.setState({ dogName: '',
+                            humanName: '',
+                            address: '',
+                            email: '',
+                            phone: ''
+            });
+        } else {
+            alert("human name and dog name are required");
+        }
     }
 
     handleDelete() {
