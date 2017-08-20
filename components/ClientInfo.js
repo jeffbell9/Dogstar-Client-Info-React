@@ -36,8 +36,11 @@ function Buttons(props) {
             <div className="buttons">
                 <button id="enter" type="submit">add client</button>
                 <button id="deleteClient" type="button" onClick={props.onDelete}>delete client</button>
+                <button id="displayClient" type="button" onClick={props.onDisplay}>display client</button>
+                <button id="displayAll" type="button" onClick={props.onDisplayAll}>display all</button>
 
-                <p id="deleteInfo">Use human name to delete client</p>                                        
+
+                <p id="deleteInfo">Use human name to delete client and display client info</p>                                        
             </div>
         );
 }
@@ -55,6 +58,8 @@ class ClientInfoForm extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleDisplay = this.handleDisplay.bind(this);
+        this.handleDisplayAll = this.handleDisplayAll.bind(this);
     }
 
     handleInputChange(event) {
@@ -92,8 +97,35 @@ class ClientInfoForm extends React.Component {
     }
 
     handleDelete() {
-        this.props.delete(this.state.humanName);
-        this.setState({humanName: ''});
+        if (this.state.humanName.length > 0) {
+            this.props.delete(this.state.humanName);
+            this.setState({ dogName: '',
+                        humanName: '',
+                        address: '',
+                        email: '',
+                        phone: ''
+            });
+        } else {
+            alert("please use human name to delete information");
+        }
+    }
+
+    handleDisplay() {
+        if (this.state.humanName.length > 0) {
+            this.props.display(this.state.humanName);
+            this.setState({ dogName: '',
+                        humanName: '',
+                        address: '',
+                        email: '',
+                        phone: ''
+            });
+        } else {
+            alert("please use human name to display information");
+        }
+    }
+
+    handleDisplayAll() {
+        this.props.displayAll();
     }
 
     render() {
@@ -118,7 +150,7 @@ class ClientInfoForm extends React.Component {
                         <input type="text" name="phone" value={this.state.phone} onChange={this.handleInputChange} />
                     </div>
 
-                    <Buttons onDelete={this.handleDelete} />
+                    <Buttons onDelete={this.handleDelete} onDisplay={this.handleDisplay} onDisplayAll={this.handleDisplayAll} />
                 </form>
             </div>	
         );
@@ -133,6 +165,8 @@ class App extends React.Component {
         this.onClientAdd = this.onClientAdd.bind(this);
         this.onClientDelete = this.onClientDelete.bind(this);
         this.loadClients = this.loadClients.bind(this);
+        this.onClientDisplay = this.onClientDisplay.bind(this);
+        this.onDisplayAll = this.onDisplayAll.bind(this);
     }
 
     loadClients() {
@@ -149,11 +183,28 @@ class App extends React.Component {
     onClientAdd(client) {
         axios.post(this.props.url, client)
         .then(res => {
-            this.loadClients();
+            alert("Client added!");
         })
         .catch(err => {
             console.log(err);
         });
+    }
+
+    onClientDisplay(client) {
+        for(let item in this.state.clients) {
+            if(this.state.clients[item].humanName === client) {
+                axios.get(this.props.url + '/' + client)
+                .then(res => {
+                    this.setState({clients: res.data.clients});
+                });
+                return;
+            }
+        }
+        alert("No client found!");
+    }
+
+    onDisplayAll() {
+        this.loadClients();
     }
 
     onClientDelete(clientName) {
@@ -173,7 +224,7 @@ class App extends React.Component {
                     <h1>Dogstar Client Info</h1>
                 </header>
                 
-                <ClientInfoForm add={this.onClientAdd} delete={this.onClientDelete} />
+                <ClientInfoForm add={this.onClientAdd} delete={this.onClientDelete} display={this.onClientDisplay} displayAll={this.onDisplayAll} />
 
                 <Display clients={this.state.clients} />
 

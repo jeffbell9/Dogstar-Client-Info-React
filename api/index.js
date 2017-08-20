@@ -15,6 +15,16 @@ router.get('/clients', (req, res) => {
     })
 });
 
+router.get('/clients/:client', (req, res) => {
+    Client.find({humanName: req.params.client}, (err, clients) => {
+        if(err) {
+            return res.status(500).json({message: err.message});
+        } else {
+            res.json({clients: clients});
+        }
+    })
+});
+
 router.post('/clients', (req, res) => {
     let client = req.body;
     Client.create(client, (err, client) => {

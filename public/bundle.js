@@ -10544,9 +10544,19 @@ function Buttons(props) {
             'delete client'
         ),
         _react2.default.createElement(
+            'button',
+            { id: 'displayClient', type: 'button', onClick: props.onDisplay },
+            'display client'
+        ),
+        _react2.default.createElement(
+            'button',
+            { id: 'displayAll', type: 'button', onClick: props.onDisplayAll },
+            'display all'
+        ),
+        _react2.default.createElement(
             'p',
             { id: 'deleteInfo' },
-            'Use human name to delete client'
+            'Use human name to delete client and display client info'
         )
     );
 }
@@ -10569,6 +10579,8 @@ var ClientInfoForm = function (_React$Component) {
         _this.handleInputChange = _this.handleInputChange.bind(_this);
         _this.handleSubmit = _this.handleSubmit.bind(_this);
         _this.handleDelete = _this.handleDelete.bind(_this);
+        _this.handleDisplay = _this.handleDisplay.bind(_this);
+        _this.handleDisplayAll = _this.handleDisplayAll.bind(_this);
         return _this;
     }
 
@@ -10609,8 +10621,37 @@ var ClientInfoForm = function (_React$Component) {
     }, {
         key: 'handleDelete',
         value: function handleDelete() {
-            this.props.delete(this.state.humanName);
-            this.setState({ humanName: '' });
+            if (this.state.humanName.length > 0) {
+                this.props.delete(this.state.humanName);
+                this.setState({ dogName: '',
+                    humanName: '',
+                    address: '',
+                    email: '',
+                    phone: ''
+                });
+            } else {
+                alert("please use human name to delete information");
+            }
+        }
+    }, {
+        key: 'handleDisplay',
+        value: function handleDisplay() {
+            if (this.state.humanName.length > 0) {
+                this.props.display(this.state.humanName);
+                this.setState({ dogName: '',
+                    humanName: '',
+                    address: '',
+                    email: '',
+                    phone: ''
+                });
+            } else {
+                alert("please use human name to display information");
+            }
+        }
+    }, {
+        key: 'handleDisplayAll',
+        value: function handleDisplayAll() {
+            this.props.displayAll();
         }
     }, {
         key: 'render',
@@ -10656,7 +10697,7 @@ var ClientInfoForm = function (_React$Component) {
                         ),
                         _react2.default.createElement('input', { type: 'text', name: 'phone', value: this.state.phone, onChange: this.handleInputChange })
                     ),
-                    _react2.default.createElement(Buttons, { onDelete: this.handleDelete })
+                    _react2.default.createElement(Buttons, { onDelete: this.handleDelete, onDisplay: this.handleDisplay, onDisplayAll: this.handleDisplayAll })
                 )
             );
         }
@@ -10678,6 +10719,8 @@ var App = function (_React$Component2) {
         _this2.onClientAdd = _this2.onClientAdd.bind(_this2);
         _this2.onClientDelete = _this2.onClientDelete.bind(_this2);
         _this2.loadClients = _this2.loadClients.bind(_this2);
+        _this2.onClientDisplay = _this2.onClientDisplay.bind(_this2);
+        _this2.onDisplayAll = _this2.onDisplayAll.bind(_this2);
         return _this2;
     }
 
@@ -10698,13 +10741,31 @@ var App = function (_React$Component2) {
     }, {
         key: 'onClientAdd',
         value: function onClientAdd(client) {
-            var _this4 = this;
-
             _axios2.default.post(this.props.url, client).then(function (res) {
-                _this4.loadClients();
+                alert("Client added!");
             }).catch(function (err) {
                 console.log(err);
             });
+        }
+    }, {
+        key: 'onClientDisplay',
+        value: function onClientDisplay(client) {
+            var _this4 = this;
+
+            for (var item in this.state.clients) {
+                if (this.state.clients[item].humanName === client) {
+                    _axios2.default.get(this.props.url + '/' + client).then(function (res) {
+                        _this4.setState({ clients: res.data.clients });
+                    });
+                    return;
+                }
+            }
+            alert("No client found!");
+        }
+    }, {
+        key: 'onDisplayAll',
+        value: function onDisplayAll() {
+            this.loadClients();
         }
     }, {
         key: 'onClientDelete',
@@ -10732,7 +10793,7 @@ var App = function (_React$Component2) {
                         'Dogstar Client Info'
                     )
                 ),
-                _react2.default.createElement(ClientInfoForm, { add: this.onClientAdd, 'delete': this.onClientDelete }),
+                _react2.default.createElement(ClientInfoForm, { add: this.onClientAdd, 'delete': this.onClientDelete, display: this.onClientDisplay, displayAll: this.onDisplayAll }),
                 _react2.default.createElement(Display, { clients: this.state.clients })
             );
         }
