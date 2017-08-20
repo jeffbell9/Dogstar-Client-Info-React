@@ -10741,8 +10741,11 @@ var App = function (_React$Component2) {
     }, {
         key: 'onClientAdd',
         value: function onClientAdd(client) {
+            var _this4 = this;
+
             _axios2.default.post(this.props.url, client).then(function (res) {
-                alert("Client added!");
+                _this4.state.clients.push(res.data.client);
+                alert("Client Added!");
             }).catch(function (err) {
                 console.log(err);
             });
@@ -10750,12 +10753,12 @@ var App = function (_React$Component2) {
     }, {
         key: 'onClientDisplay',
         value: function onClientDisplay(client) {
-            var _this4 = this;
+            var _this5 = this;
 
             for (var item in this.state.clients) {
                 if (this.state.clients[item].humanName === client) {
                     _axios2.default.get(this.props.url + '/' + client).then(function (res) {
-                        _this4.setState({ clients: res.data.clients });
+                        _this5.setState({ clients: res.data.clients });
                     });
                     return;
                 }
@@ -10770,10 +10773,10 @@ var App = function (_React$Component2) {
     }, {
         key: 'onClientDelete',
         value: function onClientDelete(clientName) {
-            var _this5 = this;
+            var _this6 = this;
 
             _axios2.default.delete(this.props.url + '/' + clientName).then(function (res) {
-                _this5.loadClients();
+                _this6.loadClients();
             }).catch(function (err) {
                 console.log(err);
             });

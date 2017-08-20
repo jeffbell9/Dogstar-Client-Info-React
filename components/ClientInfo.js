@@ -183,7 +183,8 @@ class App extends React.Component {
     onClientAdd(client) {
         axios.post(this.props.url, client)
         .then(res => {
-            alert("Client added!");
+            this.state.clients.push(res.data.client);
+            alert("Client Added!");
         })
         .catch(err => {
             console.log(err);
