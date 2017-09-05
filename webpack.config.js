@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-	entry: './app.js',
+	entry: './index.js',
 
 	output: {
 		path: path.join(__dirname, 'public'),
@@ -24,6 +24,11 @@ module.exports = {
 			{
 				test: /\.css$/,
 				loader: 'style-loader!css-loader'
+			},
+			{
+				test : /\.jpg$/,
+				exclude: /(node_modules)/,
+				loader : 'file-loader'
 			}
 		]
 	}

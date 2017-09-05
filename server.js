@@ -16,6 +16,10 @@ app.use(parser.json());
 
 app.use('/api',router);
 
+app.get('*', function (request, response){
+	response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+});
+
 app.listen(port, () => {
 	console.log(`The server is running on port ${port} !`);
 });

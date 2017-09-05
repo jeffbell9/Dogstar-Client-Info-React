@@ -23,14 +23,15 @@ header h1 {
 
 .form {
     width: 50%;
-	margin-left: 100px;
-	float: left;
+	margin-top: 10em;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: 'Indie Flower', cursive;
 }
 
 label {
 	display: block;
 	color: seagreen;
-	font-family: 'Indie Flower', cursive;
 }
 
 input {
@@ -62,7 +63,6 @@ button:hover {
 #deleteInfo {
 	font-size: 20px;
 	color: seagreen;
-	font-family: 'Indie Flower', cursive;
 }
 
 /* Show */
@@ -70,11 +70,124 @@ button:hover {
 #show {
 	color: midnightblue;
 	font-family: 'Poiret One', cursive;
-	/*float: right;*/
-	margin-right: 0px;
-	overflow: hidden;
+	margin-top: 145px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
 }
 
 .client {
 	margin-bottom: 50px;
+	text-align: center;
+}
+
+li {
+	width: 28%;
+	float: left;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	vertical-align: top;
+	border-radius: 10%;
+}
+
+ul {
+	list-style: none;
+	overflow: hidden;
+}
+
+#dogPackTitle {
+	text-align: center;
+	margin-top: 6em;
+}
+
+#dogName {
+	text-align: center;
+	font-size: 1.35em;
+	color: black;
+}
+
+#wrapper {
+	margin: 0 auto;
+	width: 50%;
+}
+
+#clientDogName, 
+#clientInfo, 
+h3 {
+	text-align: center;
+}
+
+#clientDogPic {
+	position: absolute;
+	top: 20%;
+	left: 73%;
+	width: 20%;
+	height: 20%;
+}
+
+#clientDogPic img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 50%;
+}
+
+#clientWrapper {
+	margin-top: 4em;
+	font-size: 2em;
+	font-family: 'Indie Flower', cursive;
+}
+
+#add {
+	position: fixed;
+	top: 145px;
+	left: 1000px;
+	font-size: 1.35em;
+}
+
+#add a {
+	text-decoration: none;
+	color: inherit;
+}
+
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+#dogPack {
+	font-family: 'Indie Flower', cursive;
+}
+
+#clientDogName h1 {
+	margin-bottom: 0;
+}
+
+#clientInfo h2,
+#clientInfo h3 {
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+.return {
+	text-align: center;
+	font-size: 1.35em;
+	margin-top: 32px;
+	font-size: 25px;
+}
+
+.return a {
+	color: black;
+}
+
+.client img {
+	width: 33%;
+	height: auto;
+	border-radius: 10%;
 }
