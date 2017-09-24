@@ -11,7 +11,8 @@ export default class ClientInfoForm extends React.Component {
                         humanName: '',
                         address: '',
                         email: '',
-                        phone: ''
+                        phone: '',
+                        photoURL: ''
          };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -22,33 +23,52 @@ export default class ClientInfoForm extends React.Component {
     }
 
     handleInputChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
+        if(event.target.name === "photo") {
+            let imageFile = document.getElementById("photo");
 
-        this.setState({
-            [name]: value
-        });
+            let value = imageFile.files[0].name;
+
+            this.setState({
+                photoURL: `/images/${this.state.dogName}.jpg`
+            })
+        } else {
+
+            const target = event.target;
+            let value = target.value;
+            const name = target.name;
+
+            this.setState({
+                [name]: value
+            });
+        }
     }
 
      handleSubmit(event) {
         event.preventDefault();
 
-        if (this.state.humanName.length > 0) {
-            let newClient = {
-                dogName: this.state.dogName,
-                humanName: this.state.humanName,
-                address: this.state.address,
-                email: this.state.email,
-                phone: this.state.phone
-            };
+        let picFile = document.getElementById("photo").files[0];
 
-            this.props.add(newClient);
+        console.log(picFile);
+
+        if (this.state.humanName.length > 0 && this.state.dogName.length > 0) {
+
+            let formData = new FormData();
+
+            formData.append('dogName', this.state.dogName);
+            formData.append('humanName', this.state.humanName);
+            formData.append('address', this.state.address);
+            formData.append('email', this.state.email);
+            formData.append('phone', this.state.phone);
+            formData.append('photoURL', this.state.photoURL);
+            formData.append('photo', picFile, '/images/' + this.state.dogName + '.jpg');
+
+            this.props.add(formData);
             this.setState({ dogName: '',
                             humanName: '',
                             address: '',
                             email: '',
-                            phone: ''
+                            phone: '',
+                            photoURL: ''
             });
         } else {
             alert("human name and dog name are required");
@@ -56,16 +76,17 @@ export default class ClientInfoForm extends React.Component {
     }
 
     handleDelete() {
-        if (this.state.humanName.length > 0) {
-            this.props.delete(this.state.humanName);
+        if (this.state.humanName.length > 0 && this.state.dogName.length > 0) {
+            this.props.delete(this.state.humanName, this.state.dogName);
             this.setState({ dogName: '',
                         humanName: '',
                         address: '',
                         email: '',
-                        phone: ''
+                        phone: '',
+                        photoURL: ''
             });
         } else {
-            alert("please use human name to delete information");
+            alert("please use human name and dog name to delete information");
         }
     }
 
@@ -76,7 +97,8 @@ export default class ClientInfoForm extends React.Component {
                         humanName: '',
                         address: '',
                         email: '',
-                        phone: ''
+                        phone: '',
+                        photoURL: ''
             });
         } else {
             alert("please use human name to display information");
@@ -87,11 +109,22 @@ export default class ClientInfoForm extends React.Component {
         this.props.displayAll();
     }
 
+    playAudio() {
+        let audio = document.getElementById("audio");
+        audio.play()
+        .then(() => {
+            console.log("Woof!");
+        })
+        .catch((error) => {
+            console.error(error);
+        })
+    }
+
     render() {
         return (
             <div>
                 <div className="form">
-                    <form onSubmit={this.handleSubmit}>
+                    <form id="inputForm" name="inputForm" encType="multipart/form-data" onSubmit={this.handleSubmit}>
                         <div className="info">
                             <label htmlFor="dogname">dog name</label>
                             <input type="text" name="dogName" value={this.state.dogName} onChange={this.handleInputChange} />
@@ -108,12 +141,17 @@ export default class ClientInfoForm extends React.Component {
 
                             <label htmlFor="phone">phone</label>
                             <input type="text" name="phone" value={this.state.phone} onChange={this.handleInputChange} />
+
+                            <label htmlFor="photo">photo</label>
+                            <input type="file" id="photo" name="photo" accept="image/*" value={this.state.photo} onChange={this.handleInputChange}/>
                         </div>
 
                         <Buttons onDelete={this.handleDelete} onDisplay={this.handleDisplay} onDisplayAll={this.handleDisplayAll} />
                     </form>
 
-                    <p className="return"><Link to="/">back to dog pack</Link></p>
+                    <audio id="audio" src="/audio/single-dog-bark.wav"></audio>
+
+                    <p className="return"><Link to="/" onMouseDown={this.playAudio}>back to dog pack</Link></p>
                 </div>
             </div>	
         );

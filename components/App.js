@@ -27,8 +27,8 @@ class App extends React.Component {
     loadClients() {
         axios.get(this.props.url)
         .then(res => {
+            console.log(res.data.clients);
             this.setState({clients: res.data.clients});
-            console.log(this.state.clients);
         })
     }
 
@@ -39,8 +39,15 @@ class App extends React.Component {
     onClientAdd(client) {
         axios.post(this.props.url, client)
         .then(res => {
-            this.state.clients.push(res.data.client);
-            alert("Client Added!");
+            if(this.state.clients.some(function(obj) {
+                return res.data.client.humanName === obj.humanName && res.data.client.dogName === obj.dogName;
+            }.bind(this))) {
+                this.loadClients();
+                alert("Client Updated!");
+            } else {
+                this.state.clients.push(res.data.client);
+                alert("Client Added!");
+            }
         })
         .catch(err => {
             console.log(err);
@@ -64,10 +71,11 @@ class App extends React.Component {
         this.loadClients();
     }
 
-    onClientDelete(clientName) {
-        axios.delete(this.props.url + '/' + clientName)
+    onClientDelete(clientName, dogName) {
+        axios.delete(this.props.url + '/' + clientName + '/' + dogName)
         .then(res => {
             this.loadClients();
+            alert(res.data.message);
         })
         .catch(err => {
             console.log(err);

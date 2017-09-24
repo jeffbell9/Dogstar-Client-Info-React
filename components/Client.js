@@ -8,7 +8,7 @@ function Client(props) {
             <p>address: {props.address}</p>
             <p>email: {props.email}</p>
             <p>phone: {props.phone}</p>
-            <img src={props.pic} alt="A picture of client's dog" />
+            <img id="displayImage" src={props.pic} alt="Upload a picture!" />
         </div>
     );
 }

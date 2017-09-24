@@ -8,7 +8,7 @@ const clientSchema = new mongoose.Schema({
     address: String,
     email: String,
     phone: String,
-    photo: String
+    photoURL: String
 });
 
 const model = mongoose.model('Client', clientSchema);

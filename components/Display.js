@@ -13,7 +13,7 @@ function Display(props) {
                         address = {client.address}
                         email = {client.email}
                         phone = {client.phone}
-                        pic = {client.photo}
+                        pic = {client.photoURL}
                         key = {client._id} />
                 )
             }.bind(this))}

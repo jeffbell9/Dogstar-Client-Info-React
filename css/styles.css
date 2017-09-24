@@ -9,9 +9,8 @@ header h1 {
 	padding: 30px 0 30px;
 	text-align: center;
 	margin: 0 0 40px;
-	background-color: lightskyblue;
-	color: slategray;
 	border: 5px solid slategray;
+	font-family: 'Indie Flower', cursive;
 
 }
 
@@ -70,7 +69,7 @@ button:hover {
 #show {
 	color: midnightblue;
 	font-family: 'Poiret One', cursive;
-	margin-top: 145px;
+	margin-top: 169px;
 	margin-left: auto;
 	margin-right: auto;
 	width: 50%;
@@ -83,21 +82,26 @@ button:hover {
 
 li {
 	width: 28%;
+	height: 200px;
 	float: left;
 	margin-left: 10px;
 	margin-top: 10px;
+	/*overflow: auto;*/
+	text-align: center;
 }
 
-img {
+img[src*="images"] {
 	max-width: 100%;
-	height: auto;
+    height: auto;
 	vertical-align: top;
 	border-radius: 10%;
+	-ms-transform: rotate(90deg); /* IE 9 */
+	-webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+	transform: rotate(90deg);
 }
 
 ul {
 	list-style: none;
-	overflow: hidden;
 }
 
 #dogPackTitle {
@@ -124,29 +128,40 @@ h3 {
 
 #clientDogPic {
 	position: absolute;
-	top: 20%;
-	left: 73%;
-	width: 20%;
-	height: 20%;
+	top: 33%;
+	left: 65%;
+	width: 30%;
+	height: 30%;
 }
 
 #clientDogPic img {
 	max-width: 100%;
 	height: auto;
 	border-radius: 50%;
+	-ms-transform: rotate(90deg); /* IE 9 */
+	-webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+	transform: rotate(90deg);
 }
 
 #clientWrapper {
-	margin-top: 4em;
+	margin-top: 4.5em;
 	font-size: 2em;
 	font-family: 'Indie Flower', cursive;
 }
 
 #add {
-	position: fixed;
-	top: 145px;
-	left: 1000px;
+	float: right;
+	margin-right: 69px;
+	padding: 10px;
 	font-size: 1.35em;
+	color: gainsboro;
+	background-color: black;
+}
+
+#add:hover {
+	background-color: gainsboro;
+	color: black;
+	border: solid black 2px;
 }
 
 #add a {
@@ -159,10 +174,13 @@ header {
 	top: 0;
 	left: 0;
 	width: 100%;
+	z-index: 100;
+	background-color: gainsboro;
 }
 
 #dogPack {
 	font-family: 'Indie Flower', cursive;
+	margin-top: 169px;
 }
 
 #clientDogName h1 {
@@ -190,4 +208,14 @@ header {
 	width: 33%;
 	height: auto;
 	border-radius: 10%;
+}
+
+#displayImage {
+	margin-top: 20px;
+}
+
+#goToClient {
+	margin-top: 69px;
+	font-size: 1.35em;
+	float: left;
 }

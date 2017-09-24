@@ -12501,8 +12501,8 @@ var App = function (_React$Component) {
             var _this2 = this;
 
             _axios2.default.get(this.props.url).then(function (res) {
+                console.log(res.data.clients);
                 _this2.setState({ clients: res.data.clients });
-                console.log(_this2.state.clients);
             });
         }
     }, {
@@ -12516,8 +12516,15 @@ var App = function (_React$Component) {
             var _this3 = this;
 
             _axios2.default.post(this.props.url, client).then(function (res) {
-                _this3.state.clients.push(res.data.client);
-                alert("Client Added!");
+                if (_this3.state.clients.some(function (obj) {
+                    return res.data.client.humanName === obj.humanName && res.data.client.dogName === obj.dogName;
+                }.bind(_this3))) {
+                    _this3.loadClients();
+                    alert("Client Updated!");
+                } else {
+                    _this3.state.clients.push(res.data.client);
+                    alert("Client Added!");
+                }
             }).catch(function (err) {
                 console.log(err);
             });
@@ -12544,11 +12551,12 @@ var App = function (_React$Component) {
         }
     }, {
         key: 'onClientDelete',
-        value: function onClientDelete(clientName) {
+        value: function onClientDelete(clientName, dogName) {
             var _this5 = this;
 
-            _axios2.default.delete(this.props.url + '/' + clientName).then(function (res) {
+            _axios2.default.delete(this.props.url + '/' + clientName + '/' + dogName).then(function (res) {
                 _this5.loadClients();
+                alert(res.data.message);
             }).catch(function (err) {
                 console.log(err);
             });
@@ -14357,7 +14365,7 @@ exports = module.exports = __webpack_require__(134)(undefined);
 
 
 // module
-exports.push([module.i, "/* Main */\n\nbody {\n\tmargin: 0 auto;\n\tbackground-color: gainsboro;\n}\n\nheader h1 {\n\tpadding: 30px 0 30px;\n\ttext-align: center;\n\tmargin: 0 0 40px;\n\tbackground-color: lightskyblue;\n\tcolor: slategray;\n\tborder: 5px solid slategray;\n\n}\n\n/* Info */\n\n.info {\n    text-align: center;\n}\n\n.form {\n    width: 50%;\n\tmargin-top: 10em;\n\tmargin-left: auto;\n\tmargin-right: auto;\n\tfont-family: 'Indie Flower', cursive;\n}\n\nlabel {\n\tdisplay: block;\n\tcolor: seagreen;\n}\n\ninput {\n\ttext-align: center;\n\tbackground-color: azure;\n\tborder-radius: 6px;\n\tmargin-bottom: 10px;\n}\n\n.buttons {\n\tmargin-top: 10px;\n    padding-top: 1em;\n    text-align: center;\n\n}\n\nbutton {\n\theight: 2em;\n\tborder-radius: 6px;\n\tmargin-bottom: 20px;\n\tmargin-right: 5px;\n\toutline: none;\n}\n\nbutton:hover {\n\tbackground-color: lightskyblue;\n}\n\n#deleteInfo {\n\tfont-size: 20px;\n\tcolor: seagreen;\n}\n\n/* Show */\n\n#show {\n\tcolor: midnightblue;\n\tfont-family: 'Poiret One', cursive;\n\tmargin-top: 145px;\n\tmargin-left: auto;\n\tmargin-right: auto;\n\twidth: 50%;\n}\n\n.client {\n\tmargin-bottom: 50px;\n\ttext-align: center;\n}\n\nli {\n\twidth: 28%;\n\tfloat: left;\n\tmargin-left: 10px;\n\tmargin-top: 10px;\n}\n\nimg {\n\tmax-width: 100%;\n\theight: auto;\n\tvertical-align: top;\n\tborder-radius: 10%;\n}\n\nul {\n\tlist-style: none;\n\toverflow: hidden;\n}\n\n#dogPackTitle {\n\ttext-align: center;\n\tmargin-top: 6em;\n}\n\n#dogName {\n\ttext-align: center;\n\tfont-size: 1.35em;\n\tcolor: black;\n}\n\n#wrapper {\n\tmargin: 0 auto;\n\twidth: 50%;\n}\n\n#clientDogName, \n#clientInfo, \nh3 {\n\ttext-align: center;\n}\n\n#clientDogPic {\n\tposition: absolute;\n\ttop: 20%;\n\tleft: 73%;\n\twidth: 20%;\n\theight: 20%;\n}\n\n#clientDogPic img {\n\tmax-width: 100%;\n\theight: auto;\n\tborder-radius: 50%;\n}\n\n#clientWrapper {\n\tmargin-top: 4em;\n\tfont-size: 2em;\n\tfont-family: 'Indie Flower', cursive;\n}\n\n#add {\n\tposition: fixed;\n\ttop: 145px;\n\tleft: 1000px;\n\tfont-size: 1.35em;\n}\n\n#add a {\n\ttext-decoration: none;\n\tcolor: inherit;\n}\n\nheader {\n\tposition: fixed;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n}\n\n#dogPack {\n\tfont-family: 'Indie Flower', cursive;\n}\n\n#clientDogName h1 {\n\tmargin-bottom: 0;\n}\n\n#clientInfo h2,\n#clientInfo h3 {\n\tmargin-top: 0;\n\tmargin-bottom: 20px;\n}\n\n.return {\n\ttext-align: center;\n\tfont-size: 1.35em;\n\tmargin-top: 32px;\n\tfont-size: 25px;\n}\n\n.return a {\n\tcolor: black;\n}\n\n.client img {\n\twidth: 33%;\n\theight: auto;\n\tborder-radius: 10%;\n}", ""]);
+exports.push([module.i, "/* Main */\n\nbody {\n\tmargin: 0 auto;\n\tbackground-color: gainsboro;\n}\n\nheader h1 {\n\tpadding: 30px 0 30px;\n\ttext-align: center;\n\tmargin: 0 0 40px;\n\tborder: 5px solid slategray;\n\tfont-family: 'Indie Flower', cursive;\n\n}\n\n/* Info */\n\n.info {\n    text-align: center;\n}\n\n.form {\n    width: 50%;\n\tmargin-top: 10em;\n\tmargin-left: auto;\n\tmargin-right: auto;\n\tfont-family: 'Indie Flower', cursive;\n}\n\nlabel {\n\tdisplay: block;\n\tcolor: seagreen;\n}\n\ninput {\n\ttext-align: center;\n\tbackground-color: azure;\n\tborder-radius: 6px;\n\tmargin-bottom: 10px;\n}\n\n.buttons {\n\tmargin-top: 10px;\n    padding-top: 1em;\n    text-align: center;\n\n}\n\nbutton {\n\theight: 2em;\n\tborder-radius: 6px;\n\tmargin-bottom: 20px;\n\tmargin-right: 5px;\n\toutline: none;\n}\n\nbutton:hover {\n\tbackground-color: lightskyblue;\n}\n\n#deleteInfo {\n\tfont-size: 20px;\n\tcolor: seagreen;\n}\n\n/* Show */\n\n#show {\n\tcolor: midnightblue;\n\tfont-family: 'Poiret One', cursive;\n\tmargin-top: 169px;\n\tmargin-left: auto;\n\tmargin-right: auto;\n\twidth: 50%;\n}\n\n.client {\n\tmargin-bottom: 50px;\n\ttext-align: center;\n}\n\nli {\n\twidth: 28%;\n\theight: 200px;\n\tfloat: left;\n\tmargin-left: 10px;\n\tmargin-top: 10px;\n\t/*overflow: auto;*/\n\ttext-align: center;\n}\n\nimg[src*=\"images\"] {\n\tmax-width: 100%;\n    height: auto;\n\tvertical-align: top;\n\tborder-radius: 10%;\n\t-ms-transform: rotate(90deg); /* IE 9 */\n\t-webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */\n\ttransform: rotate(90deg);\n}\n\nul {\n\tlist-style: none;\n}\n\n#dogPackTitle {\n\ttext-align: center;\n\tmargin-top: 6em;\n}\n\n#dogName {\n\ttext-align: center;\n\tfont-size: 1.35em;\n\tcolor: black;\n}\n\n#wrapper {\n\tmargin: 0 auto;\n\twidth: 50%;\n}\n\n#clientDogName, \n#clientInfo, \nh3 {\n\ttext-align: center;\n}\n\n#clientDogPic {\n\tposition: absolute;\n\ttop: 33%;\n\tleft: 65%;\n\twidth: 30%;\n\theight: 30%;\n}\n\n#clientDogPic img {\n\tmax-width: 100%;\n\theight: auto;\n\tborder-radius: 50%;\n\t-ms-transform: rotate(90deg); /* IE 9 */\n\t-webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */\n\ttransform: rotate(90deg);\n}\n\n#clientWrapper {\n\tmargin-top: 4.5em;\n\tfont-size: 2em;\n\tfont-family: 'Indie Flower', cursive;\n}\n\n#add {\n\tfloat: right;\n\tmargin-right: 69px;\n\tpadding: 10px;\n\tfont-size: 1.35em;\n\tcolor: gainsboro;\n\tbackground-color: black;\n}\n\n#add:hover {\n\tbackground-color: gainsboro;\n\tcolor: black;\n\tborder: solid black 2px;\n}\n\n#add a {\n\ttext-decoration: none;\n\tcolor: inherit;\n}\n\nheader {\n\tposition: fixed;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\tz-index: 100;\n\tbackground-color: gainsboro;\n}\n\n#dogPack {\n\tfont-family: 'Indie Flower', cursive;\n\tmargin-top: 169px;\n}\n\n#clientDogName h1 {\n\tmargin-bottom: 0;\n}\n\n#clientInfo h2,\n#clientInfo h3 {\n\tmargin-top: 0;\n\tmargin-bottom: 20px;\n}\n\n.return {\n\ttext-align: center;\n\tfont-size: 1.35em;\n\tmargin-top: 32px;\n\tfont-size: 25px;\n}\n\n.return a {\n\tcolor: black;\n}\n\n.client img {\n\twidth: 33%;\n\theight: auto;\n\tborder-radius: 10%;\n}\n\n#displayImage {\n\tmargin-top: 20px;\n}\n\n#goToClient {\n\tmargin-top: 69px;\n\tfont-size: 1.35em;\n\tfloat: left;\n}", ""]);
 
 // exports
 
@@ -26466,8 +26474,8 @@ function Buttons(props) {
         { className: "buttons" },
         _react2.default.createElement(
             "button",
-            { id: "enter", type: "submit" },
-            "add client"
+            { id: "enter", type: "submit", formEncType: "multipart/form-data", form: "inputForm" },
+            "add/update client"
         ),
         _react2.default.createElement(
             "button",
@@ -26475,19 +26483,9 @@ function Buttons(props) {
             "delete client"
         ),
         _react2.default.createElement(
-            "button",
-            { id: "displayClient", type: "button", onClick: props.onDisplay },
-            "display client"
-        ),
-        _react2.default.createElement(
-            "button",
-            { id: "displayAll", type: "button", onClick: props.onDisplayAll },
-            "display all"
-        ),
-        _react2.default.createElement(
             "p",
             { id: "deleteInfo" },
-            "Use human name to delete client and display client info"
+            "Use human name and dog name to delete client"
         )
     );
 }
@@ -26548,7 +26546,7 @@ function Client(props) {
             "phone: ",
             props.phone
         ),
-        _react2.default.createElement("img", { src: props.pic, alt: "A picture of client's dog" })
+        _react2.default.createElement("img", { id: "displayImage", src: props.pic, alt: "Upload a picture!" })
     );
 }
 
@@ -26606,7 +26604,8 @@ var ClientInfoForm = function (_React$Component) {
             humanName: '',
             address: '',
             email: '',
-            phone: ''
+            phone: '',
+            photoURL: ''
         };
 
         _this.handleInputChange = _this.handleInputChange.bind(_this);
@@ -26620,32 +26619,51 @@ var ClientInfoForm = function (_React$Component) {
     _createClass(ClientInfoForm, [{
         key: 'handleInputChange',
         value: function handleInputChange(event) {
-            var target = event.target;
-            var value = target.value;
-            var name = target.name;
+            if (event.target.name === "photo") {
+                var imageFile = document.getElementById("photo");
 
-            this.setState(_defineProperty({}, name, value));
+                var value = imageFile.files[0].name;
+
+                this.setState({
+                    photoURL: '/images/' + this.state.dogName + '.jpg'
+                });
+            } else {
+
+                var target = event.target;
+                var _value = target.value;
+                var name = target.name;
+
+                this.setState(_defineProperty({}, name, _value));
+            }
         }
     }, {
         key: 'handleSubmit',
         value: function handleSubmit(event) {
             event.preventDefault();
 
-            if (this.state.humanName.length > 0) {
-                var newClient = {
-                    dogName: this.state.dogName,
-                    humanName: this.state.humanName,
-                    address: this.state.address,
-                    email: this.state.email,
-                    phone: this.state.phone
-                };
+            var picFile = document.getElementById("photo").files[0];
 
-                this.props.add(newClient);
+            console.log(picFile);
+
+            if (this.state.humanName.length > 0 && this.state.dogName.length > 0) {
+
+                var formData = new FormData();
+
+                formData.append('dogName', this.state.dogName);
+                formData.append('humanName', this.state.humanName);
+                formData.append('address', this.state.address);
+                formData.append('email', this.state.email);
+                formData.append('phone', this.state.phone);
+                formData.append('photoURL', this.state.photoURL);
+                formData.append('photo', picFile, '/images/' + this.state.dogName + '.jpg');
+
+                this.props.add(formData);
                 this.setState({ dogName: '',
                     humanName: '',
                     address: '',
                     email: '',
-                    phone: ''
+                    phone: '',
+                    photoURL: ''
                 });
             } else {
                 alert("human name and dog name are required");
@@ -26654,16 +26672,17 @@ var ClientInfoForm = function (_React$Component) {
     }, {
         key: 'handleDelete',
         value: function handleDelete() {
-            if (this.state.humanName.length > 0) {
-                this.props.delete(this.state.humanName);
+            if (this.state.humanName.length > 0 && this.state.dogName.length > 0) {
+                this.props.delete(this.state.humanName, this.state.dogName);
                 this.setState({ dogName: '',
                     humanName: '',
                     address: '',
                     email: '',
-                    phone: ''
+                    phone: '',
+                    photoURL: ''
                 });
             } else {
-                alert("please use human name to delete information");
+                alert("please use human name and dog name to delete information");
             }
         }
     }, {
@@ -26675,7 +26694,8 @@ var ClientInfoForm = function (_React$Component) {
                     humanName: '',
                     address: '',
                     email: '',
-                    phone: ''
+                    phone: '',
+                    photoURL: ''
                 });
             } else {
                 alert("please use human name to display information");
@@ -26685,6 +26705,16 @@ var ClientInfoForm = function (_React$Component) {
         key: 'handleDisplayAll',
         value: function handleDisplayAll() {
             this.props.displayAll();
+        }
+    }, {
+        key: 'playAudio',
+        value: function playAudio() {
+            var audio = document.getElementById("audio");
+            audio.play().then(function () {
+                console.log("Woof!");
+            }).catch(function (error) {
+                console.error(error);
+            });
         }
     }, {
         key: 'render',
@@ -26697,7 +26727,7 @@ var ClientInfoForm = function (_React$Component) {
                     { className: 'form' },
                     _react2.default.createElement(
                         'form',
-                        { onSubmit: this.handleSubmit },
+                        { id: 'inputForm', name: 'inputForm', encType: 'multipart/form-data', onSubmit: this.handleSubmit },
                         _react2.default.createElement(
                             'div',
                             { className: 'info' },
@@ -26731,16 +26761,23 @@ var ClientInfoForm = function (_React$Component) {
                                 { htmlFor: 'phone' },
                                 'phone'
                             ),
-                            _react2.default.createElement('input', { type: 'text', name: 'phone', value: this.state.phone, onChange: this.handleInputChange })
+                            _react2.default.createElement('input', { type: 'text', name: 'phone', value: this.state.phone, onChange: this.handleInputChange }),
+                            _react2.default.createElement(
+                                'label',
+                                { htmlFor: 'photo' },
+                                'photo'
+                            ),
+                            _react2.default.createElement('input', { type: 'file', id: 'photo', name: 'photo', accept: 'image/*', value: this.state.photo, onChange: this.handleInputChange })
                         ),
                         _react2.default.createElement(_Buttons2.default, { onDelete: this.handleDelete, onDisplay: this.handleDisplay, onDisplayAll: this.handleDisplayAll })
                     ),
+                    _react2.default.createElement('audio', { id: 'audio', src: '/audio/single-dog-bark.wav' }),
                     _react2.default.createElement(
                         'p',
                         { className: 'return' },
                         _react2.default.createElement(
                             _reactRouterDom.Link,
-                            { to: '/' },
+                            { to: '/', onMouseDown: this.playAudio },
                             'back to dog pack'
                         )
                     )
@@ -26783,12 +26820,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ClientPage = function ClientPage(props) {
     var index = props.match.params.index;
 
+    var playAudio = function playAudio() {
+        var audio = document.getElementById("audio");
+        audio.play().then(function () {
+            console.log("Woof!");
+        }).catch(function (error) {
+            console.error(error);
+        });
+    };
+
     return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
             'div',
             { id: 'clientWrapper' },
+            _react2.default.createElement('audio', { id: 'audio', src: '/audio/single-dog-bark.wav' }),
             _react2.default.createElement(
                 'div',
                 { id: 'clientDogName' },
@@ -26801,7 +26848,7 @@ var ClientPage = function ClientPage(props) {
             _react2.default.createElement(
                 'div',
                 { id: 'clientDogPic' },
-                _react2.default.createElement('img', { src: props.clients[index].photo })
+                _react2.default.createElement('img', { src: props.clients[index].photoURL })
             ),
             _react2.default.createElement(
                 'div',
@@ -26832,7 +26879,7 @@ var ClientPage = function ClientPage(props) {
                 { className: 'return' },
                 _react2.default.createElement(
                     _reactRouterDom.Link,
-                    { to: '/' },
+                    { to: '/', onMouseDown: playAudio },
                     'back to dog pack'
                 )
             )
@@ -26877,7 +26924,7 @@ function Display(props) {
                 address: client.address,
                 email: client.email,
                 phone: client.phone,
-                pic: client.photo,
+                pic: client.photoURL,
                 key: client._id });
         }.bind(this))
     );
@@ -26916,6 +26963,14 @@ var _DogPackPic2 = _interopRequireDefault(_DogPackPic);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DogPack = function DogPack(props) {
+    var playAudio = function playAudio() {
+        var audio = document.getElementById("audio");
+        audio.play().then(function () {
+            console.log("Woof!");
+        }).catch(function (error) {
+            console.error(error);
+        });
+    };
     return _react2.default.createElement(
         'div',
         null,
@@ -26933,21 +26988,18 @@ var DogPack = function DogPack(props) {
                 _react2.default.createElement(
                     _reactRouterDom.Link,
                     { to: '/form' },
-                    'add/delete a client'
-                )
-            ),
-            _react2.default.createElement(
-                'p',
-                null,
-                _react2.default.createElement(
-                    _reactRouterDom.Link,
-                    { to: '/display' },
-                    'Display'
+                    'add/update a client'
                 )
             ),
             _react2.default.createElement(
                 'div',
+                { id: 'goToClient' },
+                'Click on pack member for client info >'
+            ),
+            _react2.default.createElement(
+                'div',
                 { id: 'wrapper' },
+                _react2.default.createElement('audio', { id: 'audio', src: '/audio/single-dog-bark.wav' }),
                 _react2.default.createElement(
                     'ul',
                     null,
@@ -26957,8 +27009,8 @@ var DogPack = function DogPack(props) {
                             { key: client._id },
                             _react2.default.createElement(
                                 _reactRouterDom.Link,
-                                { to: '/client/' + index },
-                                _react2.default.createElement(_DogPackPic2.default, { pic: client.photo }),
+                                { to: '/client/' + index, onMouseDown: playAudio },
+                                _react2.default.createElement(_DogPackPic2.default, { pic: client.photoURL }),
                                 _react2.default.createElement(
                                     'p',
                                     { id: 'dogName' },
@@ -26996,7 +27048,7 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DogPackPic = function DogPackPic(props) {
-    return _react2.default.createElement("img", { src: props.pic, alt: "A picture of client's dog" });
+    return _react2.default.createElement("img", { src: props.pic, alt: "Upload a picture!" });
 };
 
 exports.default = DogPackPic;

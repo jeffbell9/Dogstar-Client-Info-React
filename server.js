@@ -5,6 +5,8 @@ const express = require('express');
 const app = express();
 const router = require('./api');
 const parser = require('body-parser');
+//const multer  = require('multer')
+//const upload = multer({ dest: 'images/' })
 
 require('./database');
 require('./seed');
@@ -16,7 +18,7 @@ app.use(parser.json());
 
 app.use('/api',router);
 
-app.get('*', function (request, response){
+app.get('*', function (request, response, next){
 	response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 });
 
