@@ -48,8 +48,6 @@ export default class ClientInfoForm extends React.Component {
 
         let picFile = document.getElementById("photo").files[0];
 
-        console.log(picFile);
-
         if (this.state.humanName.length > 0 && this.state.dogName.length > 0) {
 
             let formData = new FormData();

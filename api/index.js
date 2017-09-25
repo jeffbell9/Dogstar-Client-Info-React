@@ -36,8 +36,6 @@ router.get('/clients/:client', (req, res, next) => {
 });
 
 router.post('/clients', upload.single('photo'), (req, res, next) => {
-    console.log(req.body);
-    console.log(req.file);
     let owner = req.body;
     Client.findOne({humanName: owner.humanName, dogName: owner.dogName}, (err, client) => {
         if(client) {
@@ -62,9 +60,9 @@ router.post('/clients', upload.single('photo'), (req, res, next) => {
     
 });
 
-router.delete('/clients/:name/:dogName', (req, res, next) => {
-    let owner = req.params.name;
-    let dog = req.params.dogName;
+router.delete('/clients/:clientName/:dogName', (req, res, next) => {
+    let owner = req.params.clientName;
+    let dog = req.params.dogName
     Client.findOne({humanName: owner, dogName: dog}, (err, client) => {
         if(!client) {
             console.log("No client found");

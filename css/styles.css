@@ -1,41 +1,27 @@
-/* Main */
-
 body {
 	margin: 0 auto;
-	background-color: gainsboro;
-}
-
-header h1 {
-	padding: 30px 0 30px;
-	text-align: center;
-	margin: 0 0 40px;
-	border: 5px solid slategray;
-	font-family: 'Indie Flower', cursive;
-
-}
-
-/* Info */
-
-.info {
-    text-align: center;
+	background-color: white;
 }
 
 .form {
     width: 50%;
-	margin-top: 10em;
+	margin-top: 25px;
 	margin-left: auto;
 	margin-right: auto;
 	font-family: 'Indie Flower', cursive;
+	text-align: center;
+	font-size: 1.25em;
 }
 
 label {
 	display: block;
-	color: seagreen;
+	font-weight: bold;
+	font-size: 1.2em;
 }
 
 input {
 	text-align: center;
-	background-color: azure;
+	background-color: #CEF1ED;
 	border-radius: 6px;
 	margin-bottom: 10px;
 }
@@ -60,11 +46,10 @@ button:hover {
 }
 
 #deleteInfo {
-	font-size: 20px;
-	color: seagreen;
+	font-size: 1.3em;
+	padding-top: 0;
+	margin-top: 5px;
 }
-
-/* Show */
 
 #show {
 	color: midnightblue;
@@ -85,7 +70,7 @@ li {
 	height: 200px;
 	float: left;
 	margin-left: 10px;
-	margin-top: 10px;
+	margin-bottom: 150px;
 	/*overflow: auto;*/
 	text-align: center;
 }
@@ -105,19 +90,23 @@ ul {
 }
 
 #dogPackTitle {
-	text-align: center;
-	margin-top: 6em;
+	margin-left: 100px;
+	margin-right: 200px;
+	font-size: 3em;
+	display: inline-block;
 }
 
 #dogName {
+	margin-top: 50px;
 	text-align: center;
 	font-size: 1.35em;
 	color: black;
 }
 
 #wrapper {
-	margin: 0 auto;
-	width: 50%;
+	width: 69%;
+	float: left;
+	text-align: left;
 }
 
 #clientDogName, 
@@ -144,22 +133,21 @@ h3 {
 }
 
 #clientWrapper {
-	margin-top: 4.5em;
+	margin-top: 3.5em;
 	font-size: 2em;
 	font-family: 'Indie Flower', cursive;
 }
 
 #add {
-	float: right;
 	margin-right: 69px;
 	padding: 10px;
 	font-size: 1.35em;
-	color: gainsboro;
+	color: white;
 	background-color: black;
 }
 
 #add:hover {
-	background-color: gainsboro;
+	background-color: #CEF1ED;
 	color: black;
 	border: solid black 2px;
 }
@@ -169,18 +157,11 @@ h3 {
 	color: inherit;
 }
 
-header {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: 100;
-	background-color: gainsboro;
-}
-
 #dogPack {
 	font-family: 'Indie Flower', cursive;
-	margin-top: 169px;
+	float: right;
+	width: 31%;
+	margin-top: 125px;
 }
 
 #clientDogName h1 {
@@ -215,7 +196,9 @@ header {
 }
 
 #goToClient {
-	margin-top: 69px;
-	font-size: 1.35em;
-	float: left;
+	font-size: 1.50em;
+	margin-bottom: 100px;
+	margin-right: 282px;
+	font-family: 'Indie Flower', cursive;
+
 }

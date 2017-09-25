@@ -27,7 +27,6 @@ class App extends React.Component {
     loadClients() {
         axios.get(this.props.url)
         .then(res => {
-            console.log(res.data.clients);
             this.setState({clients: res.data.clients});
         })
     }
@@ -71,8 +70,8 @@ class App extends React.Component {
         this.loadClients();
     }
 
-    onClientDelete(clientName, dogName) {
-        axios.delete(this.props.url + '/' + clientName + '/' + dogName)
+    onClientDelete(humanName, dogName) {
+        axios.delete(this.props.url + '/' + humanName + '/' + dogName)
         .then(res => {
             this.loadClients();
             alert(res.data.message);
@@ -86,7 +85,6 @@ class App extends React.Component {
         return (
             <BrowserRouter>
                 <div>
-                    <Header />
                     
                     <Route exact path="/" render={ () => <DogPack clients={this.state.clients} /> } />
                     <Route path="/client/:index" render={ ({match}) => <ClientPage clients={this.state.clients} match={match} /> } />
