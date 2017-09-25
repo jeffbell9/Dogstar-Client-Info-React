@@ -11,7 +11,7 @@ Client.find({}, (err, clients) => {
                         address: "123 Somewhere Lane",
                         email: "human@gmail.com",
                         phone: "555-555-1234",
-                        photoURL: "/images/luke.jpg"    
+                        photoURL: "/images/Luke.jpg"    
         })
     }
 })      
