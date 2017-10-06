@@ -148,8 +148,7 @@ export default class ClientInfoForm extends React.Component {
                     </form>
 
                     <audio id="audio" src="/audio/single-dog-bark.wav"></audio>
-
-                    <p className="return"><Link to="/" onMouseDown={this.playAudio}>back to dog pack</Link></p>
+                    
                 </div>
             </div>	
         );

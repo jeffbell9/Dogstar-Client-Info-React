@@ -10,7 +10,7 @@ body {
 	margin-right: auto;
 	font-family: 'Indie Flower', cursive;
 	text-align: center;
-	font-size: 1.25em;
+	font-size: 1em;
 }
 
 label {
@@ -46,7 +46,7 @@ button:hover {
 }
 
 #deleteInfo {
-	font-size: 1.3em;
+	font-size: 1.15em;
 	padding-top: 0;
 	margin-top: 5px;
 }
@@ -103,7 +103,7 @@ ul {
 	color: black;
 }
 
-#wrapper {
+#dogPack {
 	width: 69%;
 	float: left;
 	text-align: left;
@@ -157,11 +157,11 @@ h3 {
 	color: inherit;
 }
 
-#dogPack {
+#infoForm {
 	font-family: 'Indie Flower', cursive;
 	float: right;
 	width: 31%;
-	margin-top: 125px;
+	margin-top: 100px;
 }
 
 #clientDogName h1 {
@@ -201,4 +201,10 @@ h3 {
 	margin-right: 282px;
 	font-family: 'Indie Flower', cursive;
 
+}
+
+#addUpdate {
+	font-size: 1.25em;
+	text-align: center;
+	margin-top: 120px;
 }

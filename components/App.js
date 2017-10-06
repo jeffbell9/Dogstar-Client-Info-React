@@ -45,6 +45,7 @@ class App extends React.Component {
                 alert("Client Updated!");
             } else {
                 this.state.clients.push(res.data.client);
+                this.loadClients();
                 alert("Client Added!");
             }
         })
@@ -86,9 +87,8 @@ class App extends React.Component {
             <BrowserRouter>
                 <div>
                     
-                    <Route exact path="/" render={ () => <DogPack clients={this.state.clients} /> } />
+                    <Route exact path="/" render={ () => <DogPack clients={this.state.clients} add={this.onClientAdd} delete={this.onClientDelete} display={this.onClientDisplay} displayAll={this.onDisplayAll} /> } />
                     <Route path="/client/:index" render={ ({match}) => <ClientPage clients={this.state.clients} match={match} /> } />
-                    <Route path="/form" render={ () => <ClientInfoForm add={this.onClientAdd} delete={this.onClientDelete} display={this.onClientDisplay} displayAll={this.onDisplayAll} /> } />
                     <Route path="/display" render={ () => <Display clients={this.state.clients} /> } />
 
                 </div>

@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Header from './Header';
 import DogPackPic from './DogPackPic';
+import ClientInfoForm from './ClientInfoForm';
 
 const DogPack = props => {
     const playAudio = () => {
@@ -19,14 +20,12 @@ const DogPack = props => {
 
     return (
         <div id="homeWrapper">
-            <div id="dogPack">
-
-                <span id="add"><Link to="/form">add/update/delete a client</Link></span>
-
-                {/*<p><Link to="/display">Display</Link></p>*/}
+            <div id="infoForm">
+                <h3 id="addUpdate">Add or update a client</h3>
+                <ClientInfoForm add={props.add} delete={props.delete} display={props.display} displayAll={props.displayAll} />
             </div>
 
-            <div id="wrapper">
+            <div id="dogPack">
                 <h1 id="dogPackTitle">Dogstar Dog Pack</h1>
                 <h3 id="goToClient">Click on pack member for client info</h3>
                 <audio id="audio" src="/audio/single-dog-bark.wav"></audio>
