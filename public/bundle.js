@@ -12711,7 +12711,8 @@ var App = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-        _this.state = { clients: [] };
+        _this.state = { clients: [],
+            loading: true };
 
         _this.onClientAdd = _this.onClientAdd.bind(_this);
         _this.onClientDelete = _this.onClientDelete.bind(_this);
@@ -12734,6 +12735,7 @@ var App = function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             this.loadClients();
+            this.state.loading = false;
         }
     }, {
         key: 'onClientAdd',
@@ -12792,24 +12794,32 @@ var App = function (_React$Component) {
         value: function render() {
             var _this6 = this;
 
-            return _react2.default.createElement(
-                _reactRouterDom.BrowserRouter,
-                null,
-                _react2.default.createElement(
+            if (this.state.loading) {
+                return _react2.default.createElement(
                     'div',
+                    { id: 'hideAll' },
+                    'Loading...'
+                );
+            } else {
+                return _react2.default.createElement(
+                    _reactRouterDom.BrowserRouter,
                     null,
-                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
-                            return _react2.default.createElement(_DogPack2.default, { clients: _this6.state.clients, add: _this6.onClientAdd, 'delete': _this6.onClientDelete, display: _this6.onClientDisplay, displayAll: _this6.onDisplayAll });
-                        } }),
-                    _react2.default.createElement(_reactRouterDom.Route, { path: '/client/:index', render: function render(_ref) {
-                            var match = _ref.match;
-                            return _react2.default.createElement(_ClientPage2.default, { clients: _this6.state.clients, match: match });
-                        } }),
-                    _react2.default.createElement(_reactRouterDom.Route, { path: '/display', render: function render() {
-                            return _react2.default.createElement(_Display2.default, { clients: _this6.state.clients });
-                        } })
-                )
-            );
+                    _react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
+                                return _react2.default.createElement(_DogPack2.default, { clients: _this6.state.clients, add: _this6.onClientAdd, 'delete': _this6.onClientDelete, display: _this6.onClientDisplay, displayAll: _this6.onDisplayAll });
+                            } }),
+                        _react2.default.createElement(_reactRouterDom.Route, { path: '/client/:index', render: function render(_ref) {
+                                var match = _ref.match;
+                                return _react2.default.createElement(_ClientPage2.default, { clients: _this6.state.clients, match: match });
+                            } }),
+                        _react2.default.createElement(_reactRouterDom.Route, { path: '/display', render: function render() {
+                                return _react2.default.createElement(_Display2.default, { clients: _this6.state.clients });
+                            } })
+                    )
+                );
+            }
         }
     }]);
 

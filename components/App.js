@@ -15,7 +15,8 @@ import {
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { clients: [] };
+        this.state = { clients: [],
+                       loading: true };
 
         this.onClientAdd = this.onClientAdd.bind(this);
         this.onClientDelete = this.onClientDelete.bind(this);
@@ -33,6 +34,7 @@ class App extends React.Component {
 
     componentDidMount() {
         this.loadClients();
+        this.state.loading = false;
     }
 
     onClientAdd(client) {
@@ -83,17 +85,23 @@ class App extends React.Component {
     }
 
     render() {
-        return (
-            <BrowserRouter>
-                <div>
-                    
-                    <Route exact path="/" render={ () => <DogPack clients={this.state.clients} add={this.onClientAdd} delete={this.onClientDelete} display={this.onClientDisplay} displayAll={this.onDisplayAll} /> } />
-                    <Route path="/client/:index" render={ ({match}) => <ClientPage clients={this.state.clients} match={match} /> } />
-                    <Route path="/display" render={ () => <Display clients={this.state.clients} /> } />
+        if(this.state.loading) {
+            return (
+                <div id="hideAll">Loading...</div>
+            )
+        } else {
+            return (
+                    <BrowserRouter>
+                        <div>
+                            
+                            <Route exact path="/" render={ () => <DogPack clients={this.state.clients} add={this.onClientAdd} delete={this.onClientDelete} display={this.onClientDisplay} displayAll={this.onDisplayAll} /> } />
+                            <Route path="/client/:index" render={ ({match}) => <ClientPage clients={this.state.clients} match={match} /> } />
+                            <Route path="/display" render={ () => <Display clients={this.state.clients} /> } />
 
-                </div>
-            </BrowserRouter>
-        );
+                        </div>
+                    </BrowserRouter>
+                );
+        }
     }
 }
 
