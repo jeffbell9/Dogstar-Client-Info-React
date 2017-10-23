@@ -15,8 +15,10 @@ import {
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { clients: [],
-                       loading: true };
+        this.state = { 
+            clients: [],
+            loading: true 
+        };
 
         this.onClientAdd = this.onClientAdd.bind(this);
         this.onClientDelete = this.onClientDelete.bind(this);
@@ -28,13 +30,15 @@ class App extends React.Component {
     loadClients() {
         axios.get(this.props.url)
         .then(res => {
-            this.setState({clients: res.data.clients});
+            this.setState({
+                clients: res.data.clients,
+                loading: false
+            });
         })
     }
 
     componentDidMount() {
         this.loadClients();
-        this.state.loading = false;
     }
 
     onClientAdd(client) {

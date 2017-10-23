@@ -12711,8 +12711,10 @@ var App = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-        _this.state = { clients: [],
-            loading: true };
+        _this.state = {
+            clients: [],
+            loading: true
+        };
 
         _this.onClientAdd = _this.onClientAdd.bind(_this);
         _this.onClientDelete = _this.onClientDelete.bind(_this);
@@ -12728,14 +12730,16 @@ var App = function (_React$Component) {
             var _this2 = this;
 
             _axios2.default.get(this.props.url).then(function (res) {
-                _this2.setState({ clients: res.data.clients });
+                _this2.setState({
+                    clients: res.data.clients,
+                    loading: false
+                });
             });
         }
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
             this.loadClients();
-            this.state.loading = false;
         }
     }, {
         key: 'onClientAdd',
