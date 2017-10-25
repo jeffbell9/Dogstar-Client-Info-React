@@ -88,7 +88,7 @@ li {
 img[src*="images"] {
 	max-width: 100%;
     height: auto;
-	vertical-align: top;
+	/*vertical-align: top;*/
 	border-radius: 10%;
 	-ms-transform: rotate(90deg); /* IE 9 */
 	-webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
