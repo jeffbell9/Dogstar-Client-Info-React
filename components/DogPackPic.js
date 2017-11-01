@@ -2,7 +2,10 @@ import React from 'react';
 
 const DogPackPic = props => {
     return (
-        <img src={props.pic} alt="Upload a picture!" />
+        <div>
+            <img src={props.pic} alt="Upload a picture!" />
+            <p id="dogName">{props.dogName}</p>
+        </div>
     )
 }
 

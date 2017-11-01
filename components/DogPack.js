@@ -32,7 +32,7 @@ const DogPack = props => {
                 <ul>
                     {props.clients.map((client, index) => {
                         return (
-                            <li key={client._id} ><Link to={`/client/${index}`} onMouseDown={playAudio}><DogPackPic pic={client.photoURL} /><p id="dogName">{client.dogName}</p></Link></li>
+                            <li key={client._id} ><Link to={`/client/${index}`} onMouseDown={playAudio}><DogPackPic pic={client.photoURL} dogName={client.dogName} /></Link></li>
                     )})}
                 </ul>
             </div>

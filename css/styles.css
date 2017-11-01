@@ -77,19 +77,20 @@ button:hover {
 
 li {
 	width: 28%;
-	height: 200px;
+	height: auto;
 	float: left;
 	margin-left: 10px;
-	margin-bottom: 150px;
-	/*overflow: auto;*/
+	overflow: hidden;
 	text-align: center;
+}
+
+li a {
+	color: black;
 }
 
 img[src*="images"] {
 	max-width: 100%;
     height: auto;
-	/*vertical-align: top;*/
-	border-radius: 10%;
 	-ms-transform: rotate(90deg); /* IE 9 */
 	-webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
 	transform: rotate(90deg);
@@ -107,7 +108,8 @@ ul {
 }
 
 #dogName {
-	margin-top: 50px;
+	margin-top: 35px;
+	margin-bottom: 50px;
 	text-align: center;
 	font-size: 1.35em;
 	color: black;
@@ -208,7 +210,7 @@ h3 {
 
 #goToClient {
 	font-size: 1.50em;
-	margin-bottom: 100px;
+	margin-bottom: 50px;
 	margin-right: 282px;
 	font-family: 'Indie Flower', cursive;
 
