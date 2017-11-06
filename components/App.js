@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-import Header from './Header';
 import DogPack from './DogPack';
 import ClientPage from './ClientPage';
 import ClientInfoForm from './ClientInfoForm';

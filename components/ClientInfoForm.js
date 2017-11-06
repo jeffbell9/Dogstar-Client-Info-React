@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Header from './Header';
 import Buttons from './Buttons';
 
 export default class ClientInfoForm extends React.Component {

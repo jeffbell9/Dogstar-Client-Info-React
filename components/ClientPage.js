@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Header from './Header';
-
 const ClientPage = props => {
     let index = props.match.params.index;
 
@@ -19,18 +17,23 @@ const ClientPage = props => {
 
     return (
         <div>
-            <div id="clientWrapper">
+            <div id="clientWrapper" className="container">
                 <audio id="audio" src="/audio/single-dog-bark.wav"></audio>
-                <div id="clientDogName"><h1>{props.clients[index].dogName}</h1></div>
-                <div id="clientDogPic"><img src={props.clients[index].photoURL} /></div>
-                <div id="clientInfo">
-                    <h2>{props.clients[index].humanName}</h2>
-                    <h3>{props.clients[index].address}</h3>
-                    <h3>{props.clients[index].email}</h3>
-                    <h3>{props.clients[index].phone}</h3>
+                <div className="row">
+                    <div className="col-6 offset-1">
+                        <div id="clientDogName"><h1>{props.clients[index].dogName}</h1></div>
+                        <div id="clientInfo">
+                            <h2>{props.clients[index].humanName}</h2>
+                            <h3>{props.clients[index].address}</h3>
+                            <h3>{props.clients[index].email}</h3>
+                            <h3>{props.clients[index].phone}</h3>
+                        </div>
+                        <p className="return"><Link to="/" onMouseDown={playAudio}>back to dog pack</Link></p>
+                    </div>
+                    <div className="col-5">
+                        <div id="clientDogPic"><img src={props.clients[index].photoURL} className="img-fluid" /></div>
+                    </div>
                 </div>
-
-                <p className="return"><Link to="/" onMouseDown={playAudio}>back to dog pack</Link></p>
             </div>
         </div> 
     )

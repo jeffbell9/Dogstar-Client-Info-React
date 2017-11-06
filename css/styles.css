@@ -3,26 +3,6 @@ body {
 	background-color: #F5F5F5;
 }
 
-#hideAll {
-  position: fixed;
-  left: 0px; 
-  right: 0px; 
-  top: 0px; 
-  bottom: 0px; 
-  background-color: #F5F5F5;
-  z-index: 99;
-}
-
-.form {
-    width: 50%;
-	margin-top: 25px;
-	margin-left: auto;
-	margin-right: auto;
-	font-family: 'Indie Flower', cursive;
-	text-align: center;
-	font-size: 1em;
-}
-
 label {
 	display: block;
 	font-weight: bold;
@@ -61,25 +41,9 @@ button:hover {
 	margin-top: 5px;
 }
 
-#show {
-	color: midnightblue;
-	font-family: 'Poiret One', cursive;
-	margin-top: 169px;
-	margin-left: auto;
-	margin-right: auto;
-	width: 50%;
-}
-
-.client {
-	margin-bottom: 50px;
-	text-align: center;
-}
-
 li {
 	width: 28%;
-	height: auto;
 	float: left;
-	margin-left: 10px;
 	overflow: hidden;
 	text-align: center;
 }
@@ -89,8 +53,6 @@ li a {
 }
 
 img[src*="images"] {
-	max-width: 100%;
-    height: auto;
 	-ms-transform: rotate(90deg); /* IE 9 */
 	-webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
 	transform: rotate(90deg);
@@ -101,43 +63,25 @@ ul {
 }
 
 #dogPackTitle {
-	margin-left: 100px;
-	margin-right: 200px;
-	font-size: 3em;
-	display: inline-block;
+	margin-top: 20px;
+	margin-bottom: 35px;
 }
 
 #dogName {
-	margin-top: 35px;
-	margin-bottom: 50px;
+	margin-top: 15px;
+	margin-bottom: 25px;
 	text-align: center;
-	font-size: 1.35em;
+	font-size: .8em;
 	color: black;
 }
 
-#dogPack {
-	width: 69%;
-	float: left;
-	text-align: left;
-}
-
 #clientDogName, 
-#clientInfo, 
-h3 {
+#clientInfo {
 	text-align: center;
 }
 
-#clientDogPic {
-	position: absolute;
-	top: 33%;
-	left: 65%;
-	width: 30%;
-	height: 30%;
-}
-
 #clientDogPic img {
-	max-width: 100%;
-	height: auto;
+	margin-top: 15px;
 	border-radius: 50%;
 	-ms-transform: rotate(90deg); /* IE 9 */
 	-webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
@@ -145,17 +89,9 @@ h3 {
 }
 
 #clientWrapper {
-	margin-top: 3.5em;
-	font-size: 2em;
+	margin-top: 50px;
+	font-size: 1.5em;
 	font-family: 'Indie Flower', cursive;
-}
-
-#add {
-	margin-right: 69px;
-	padding: 10px;
-	font-size: 1.35em;
-	color: white;
-	background-color: black;
 }
 
 #add:hover {
@@ -171,14 +107,8 @@ h3 {
 
 #infoForm {
 	font-family: 'Indie Flower', cursive;
-	float: right;
-	width: 31%;
-	margin-top: 90px;
 	text-align: center;
-}
-
-#clientDogName h1 {
-	margin-bottom: 0;
+	font-size: .5em;
 }
 
 #clientInfo h2,
@@ -189,35 +119,73 @@ h3 {
 
 .return {
 	text-align: center;
-	font-size: 1.35em;
+	font-size: 1em;
 	margin-top: 32px;
-	font-size: 25px;
 }
 
 .return a {
 	color: black;
 }
 
-.client img {
-	width: 33%;
-	height: auto;
-	border-radius: 10%;
-}
-
-#displayImage {
-	margin-top: 20px;
-}
-
 #goToClient {
-	font-size: 1.50em;
 	margin-bottom: 50px;
-	margin-right: 282px;
 	font-family: 'Indie Flower', cursive;
+	font-size: 1.4em;
 
 }
 
 #addUpdate {
-	font-size: 1.25em;
+	font-size: 1.4em;
 	text-align: center;
-	margin-top: 65px;
+}
+
+#dogPack {
+	margin-left: -55px;
+}
+
+@media (min-width: 768px) {
+	#dogName {
+		font-size: 1em;
+	}
+
+	#infoForm {
+		font-size: .8em;
+	}
+
+	#clientDogName h1 {
+		font-size: 2em;
+	}
+
+	#clientInfo h2,
+	#clientInfo h3 {
+		font-size: 1.5em;
+	}
+
+	.return {
+		font-size: 1.2em;
+	}
+}
+
+@media (min-width: 992px) {
+	#dogName {
+		font-size: 1.2em;
+		margin-top: 25px;
+	}
+
+	#clientDogName h1 {
+		font-size: 2.3em;
+	}
+	
+	#clientInfo h2,
+	#clientInfo h3 {
+		font-size: 1.8em;
+	}
+
+	.return {
+		font-size: 1.5em;
+	}
+
+	#clientDogPic img {
+		width: 75%;
+	}
 }

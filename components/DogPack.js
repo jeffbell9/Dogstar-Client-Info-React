@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import Header from './Header';
 import DogPackPic from './DogPackPic';
 import ClientInfoForm from './ClientInfoForm';
 
@@ -19,22 +18,35 @@ const DogPack = props => {
     }
 
     return (
-        <div id="homeWrapper">
-            <div id="infoForm">
-                <h3 id="addUpdate">Add or update a client</h3>
-                <ClientInfoForm add={props.add} delete={props.delete} display={props.display} displayAll={props.displayAll} />
+        <div className="container">
+            <div className="row">
+                <div className="col-12">
+                    <h1 id="dogPackTitle">Dogstar Dog Pack</h1>
+                </div>
             </div>
-
-            <div id="dogPack">
-                <h1 id="dogPackTitle">Dogstar Dog Pack</h1>
-                <h3 id="goToClient">Click on pack member for client info</h3>
-                <audio id="audio" src="/audio/single-dog-bark.wav"></audio>
-                <ul>
-                    {props.clients.map((client, index) => {
-                        return (
-                            <li key={client._id} ><Link to={`/client/${index}`} onMouseDown={playAudio}><DogPackPic pic={client.photoURL} dogName={client.dogName} /></Link></li>
-                    )})}
-                </ul>
+            <div className="row">
+                <div className="col-11 offset-1">
+                    <h3 id="goToClient">Click on pack member for client info</h3>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-7">
+                    <div id="dogPack">
+                        <audio id="audio" src="/audio/single-dog-bark.wav"></audio>
+                        <ul>
+                            {props.clients.map((client, index) => {
+                                return (
+                                    <li key={client._id} ><Link to={`/client/${index}`} onMouseDown={playAudio}><DogPackPic pic={client.photoURL} dogName={client.dogName} /></Link></li>
+                            )})}
+                        </ul>
+                    </div>
+                </div>
+                <div className="col-5">
+                    <div id="infoForm">
+                        <h3 id="addUpdate">Add or update a client</h3>
+                        <ClientInfoForm add={props.add} delete={props.delete} display={props.display} displayAll={props.displayAll} />
+                    </div>
+                </div>
             </div>
         </div>
     )
