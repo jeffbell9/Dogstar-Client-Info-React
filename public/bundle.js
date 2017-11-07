@@ -27080,7 +27080,12 @@ var DogPackPic = function (_Component) {
                 return _react2.default.createElement(
                     'div',
                     null,
-                    _react2.default.createElement('img', null)
+                    _react2.default.createElement('img', null),
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        'Loading...'
+                    )
                 );
             }
             return _react2.default.createElement(
