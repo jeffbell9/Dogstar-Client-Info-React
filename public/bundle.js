@@ -27077,7 +27077,11 @@ var DogPackPic = function (_Component) {
                     'Sorry!'
                 );
             } else if (!this.state.loaded) {
-                return _react2.default.createElement('p', null);
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement('img', null)
+                );
             }
             return _react2.default.createElement(
                 'div',

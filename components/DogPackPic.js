@@ -31,7 +31,7 @@ export default class DogPackPic extends Component {
         if(this.state.error) {
             return <p>Sorry!</p>
         } else if(!this.state.loaded) {
-            return <p></p>
+            return <div><img /></div>
         }
         return (
             <div>
