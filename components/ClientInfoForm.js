@@ -1,9 +1,10 @@
 import React from 'react';
+import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Buttons from './Buttons';
 
-export default class ClientInfoForm extends React.Component {
+export default class ClientInfoForm extends Component {
     constructor(props) {
         super(props);
         this.state = {  dogName: '',

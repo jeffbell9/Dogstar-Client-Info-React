@@ -1,4 +1,5 @@
 import React from 'react';
+import { Component } from 'react';
 import axios from 'axios';
 
 import DogPack from './DogPack';
@@ -11,12 +12,11 @@ import {
     Route
 } from 'react-router-dom';
 
-class App extends React.Component {
+export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            clients: [],
-            loading: true 
+            clients: []
         };
 
         this.onClientAdd = this.onClientAdd.bind(this);
@@ -31,7 +31,6 @@ class App extends React.Component {
         .then(res => {
             this.setState({
                 clients: res.data.clients,
-                loading: false
             });
         })
     }
@@ -88,24 +87,16 @@ class App extends React.Component {
     }
 
     render() {
-        if(this.state.loading) {
-            return (
-                <div id="hideAll">Loading...</div>
-            )
-        } else {
-            return (
-                    <BrowserRouter>
-                        <div>
-                            
-                            <Route exact path="/" render={ () => <DogPack clients={this.state.clients} add={this.onClientAdd} delete={this.onClientDelete} display={this.onClientDisplay} displayAll={this.onDisplayAll} /> } />
-                            <Route path="/client/:index" render={ ({match}) => <ClientPage clients={this.state.clients} match={match} /> } />
-                            <Route path="/display" render={ () => <Display clients={this.state.clients} /> } />
+        return (
+            <BrowserRouter>
+                <div>
+                    
+                    <Route exact path="/" render={ () => <DogPack clients={this.state.clients} add={this.onClientAdd} delete={this.onClientDelete} display={this.onClientDisplay} displayAll={this.onDisplayAll} /> } />
+                    <Route path="/client/:index" render={ ({match}) => <ClientPage clients={this.state.clients} match={match} /> } />
+                    <Route path="/display" render={ () => <Display clients={this.state.clients} /> } />
 
-                        </div>
-                    </BrowserRouter>
-                );
-        }
+                </div>
+            </BrowserRouter>
+        )
     }
 }
-
-export default App;

@@ -11443,8 +11443,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ClientInfoForm = function (_React$Component) {
-    _inherits(ClientInfoForm, _React$Component);
+var ClientInfoForm = function (_Component) {
+    _inherits(ClientInfoForm, _Component);
 
     function ClientInfoForm(props) {
         _classCallCheck(this, ClientInfoForm);
@@ -11627,7 +11627,7 @@ var ClientInfoForm = function (_React$Component) {
     }]);
 
     return ClientInfoForm;
-}(_react2.default.Component);
+}(_react.Component);
 
 exports.default = ClientInfoForm;
 
@@ -12665,8 +12665,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var App = function (_React$Component) {
-    _inherits(App, _React$Component);
+var App = function (_Component) {
+    _inherits(App, _Component);
 
     function App(props) {
         _classCallCheck(this, App);
@@ -12674,8 +12674,7 @@ var App = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
         _this.state = {
-            clients: [],
-            loading: true
+            clients: []
         };
 
         _this.onClientAdd = _this.onClientAdd.bind(_this);
@@ -12693,8 +12692,7 @@ var App = function (_React$Component) {
 
             _axios2.default.get(this.props.url).then(function (res) {
                 _this2.setState({
-                    clients: res.data.clients,
-                    loading: false
+                    clients: res.data.clients
                 });
             });
         }
@@ -12760,37 +12758,29 @@ var App = function (_React$Component) {
         value: function render() {
             var _this6 = this;
 
-            if (this.state.loading) {
-                return _react2.default.createElement(
+            return _react2.default.createElement(
+                _reactRouterDom.BrowserRouter,
+                null,
+                _react2.default.createElement(
                     'div',
-                    { id: 'hideAll' },
-                    'Loading...'
-                );
-            } else {
-                return _react2.default.createElement(
-                    _reactRouterDom.BrowserRouter,
                     null,
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
-                                return _react2.default.createElement(_DogPack2.default, { clients: _this6.state.clients, add: _this6.onClientAdd, 'delete': _this6.onClientDelete, display: _this6.onClientDisplay, displayAll: _this6.onDisplayAll });
-                            } }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/client/:index', render: function render(_ref) {
-                                var match = _ref.match;
-                                return _react2.default.createElement(_ClientPage2.default, { clients: _this6.state.clients, match: match });
-                            } }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/display', render: function render() {
-                                return _react2.default.createElement(_Display2.default, { clients: _this6.state.clients });
-                            } })
-                    )
-                );
-            }
+                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
+                            return _react2.default.createElement(_DogPack2.default, { clients: _this6.state.clients, add: _this6.onClientAdd, 'delete': _this6.onClientDelete, display: _this6.onClientDisplay, displayAll: _this6.onDisplayAll });
+                        } }),
+                    _react2.default.createElement(_reactRouterDom.Route, { path: '/client/:index', render: function render(_ref) {
+                            var match = _ref.match;
+                            return _react2.default.createElement(_ClientPage2.default, { clients: _this6.state.clients, match: match });
+                        } }),
+                    _react2.default.createElement(_reactRouterDom.Route, { path: '/display', render: function render() {
+                            return _react2.default.createElement(_Display2.default, { clients: _this6.state.clients });
+                        } })
+                )
+            );
         }
     }]);
 
     return App;
-}(_react2.default.Component);
+}(_react.Component);
 
 exports.default = App;
 
@@ -27021,11 +27011,13 @@ exports.default = DogPack;
 
 /* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/jeffbell/Desktop/Projects/dogstar-client-info-react/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/jeffbell/Desktop/Projects/dogstar-client-info-react/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(5);
 
@@ -27033,18 +27025,75 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DogPackPic = function DogPackPic(props) {
-    return _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement("img", { src: props.pic, className: "img-fluid", alt: "Upload a picture!" }),
-        _react2.default.createElement(
-            "p",
-            { id: "dogName" },
-            props.dogName
-        )
-    );
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DogPackPic = function (_Component) {
+    _inherits(DogPackPic, _Component);
+
+    function DogPackPic(props) {
+        _classCallCheck(this, DogPackPic);
+
+        var _this = _possibleConstructorReturn(this, (DogPackPic.__proto__ || Object.getPrototypeOf(DogPackPic)).call(this, props));
+
+        _this.state = {
+            loaded: false,
+            error: false
+        };
+        return _this;
+    }
+
+    _createClass(DogPackPic, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            var img = new Image();
+
+            img.onload = function () {
+                _this2.setState({
+                    loaded: true
+                });
+            };
+
+            img.onerror = function () {
+                _this2.setState({
+                    error: true
+                });
+            };
+
+            img.src = this.props.pic;
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            if (this.state.error) {
+                return _react2.default.createElement(
+                    'p',
+                    null,
+                    'Sorry!'
+                );
+            } else if (!this.state.loaded) {
+                return _react2.default.createElement('p', null);
+            }
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement('img', { src: this.props.pic, className: 'img-fluid', alt: 'Upload a picture!' }),
+                _react2.default.createElement(
+                    'p',
+                    { id: 'dogName' },
+                    this.props.dogName
+                )
+            );
+        }
+    }]);
+
+    return DogPackPic;
+}(_react.Component);
 
 exports.default = DogPackPic;
 

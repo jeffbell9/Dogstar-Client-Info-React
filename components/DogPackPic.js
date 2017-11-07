@@ -1,12 +1,43 @@
 import React from 'react';
+import { Component } from 'react';
 
-const DogPackPic = props => {
-    return (
-        <div>
-            <img src={props.pic} className="img-fluid" alt="Upload a picture!" />
-            <p id="dogName">{props.dogName}</p>
-        </div>
-    )
+export default class DogPackPic extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loaded: false,
+            error: false
+        }
+    }
+
+    componentDidMount() {
+        const img = new Image();
+
+        img.onload = () => {
+            this.setState({
+                loaded: true
+            })
+        }
+
+        img.onerror = () => {
+            this.setState({
+                error: true
+            })
+        }
+
+        img.src = this.props.pic;
+    }
+    render() {
+        if(this.state.error) {
+            return <p>Sorry!</p>
+        } else if(!this.state.loaded) {
+            return <p></p>
+        }
+        return (
+            <div>
+                <img src={this.props.pic} className="img-fluid" alt="Upload a picture!" />
+                <p id="dogName">{this.props.dogName}</p>
+            </div>
+        )
+    }
 }
-
-export default DogPackPic;
