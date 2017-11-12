@@ -62,10 +62,6 @@ ul {
 	list-style: none;
 }
 
-#loading {
-	width: 275px;
-}
-
 #dogPackTitle {
 	margin-top: 20px;
 	margin-bottom: 35px;
@@ -141,10 +137,6 @@ ul {
 #addUpdate {
 	font-size: 1.4em;
 	text-align: center;
-}
-
-#dogPack {
-	margin-left: -55px;
 }
 
 @media (min-width: 768px) {
