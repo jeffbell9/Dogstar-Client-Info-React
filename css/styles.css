@@ -62,6 +62,10 @@ ul {
 	list-style: none;
 }
 
+#loading {
+	width: 275px;
+}
+
 #dogPackTitle {
 	margin-top: 20px;
 	margin-bottom: 35px;
