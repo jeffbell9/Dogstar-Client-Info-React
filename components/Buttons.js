@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Buttons(props) {
+const Buttons = props => {
     return (
         <div className="buttons">
             <button id="enter" type="submit" formEncType="multipart/form-data" form="inputForm">Submit</button>

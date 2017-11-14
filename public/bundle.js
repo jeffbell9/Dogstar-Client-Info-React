@@ -26650,7 +26650,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Buttons(props) {
+var Buttons = function Buttons(props) {
     return _react2.default.createElement(
         "div",
         { className: "buttons" },
@@ -26670,7 +26670,7 @@ function Buttons(props) {
             "delete client"
         )
     );
-}
+};
 
 exports.default = Buttons;
 
@@ -26897,6 +26897,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
@@ -26917,89 +26919,226 @@ var _ClientInfoForm2 = _interopRequireDefault(_ClientInfoForm);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DogPack = function DogPack(props) {
-    var playAudio = function playAudio() {
-        var audio = document.getElementById("audio");
-        audio.play().then(function () {
-            console.log("Woof!");
-        }).catch(function (error) {
-            console.error(error);
-        });
-    };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-    return _react2.default.createElement(
-        'div',
-        { className: 'container' },
-        _react2.default.createElement(
-            'div',
-            { className: 'row' },
-            _react2.default.createElement(
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DogPack = function (_Component) {
+    _inherits(DogPack, _Component);
+
+    function DogPack(props) {
+        _classCallCheck(this, DogPack);
+
+        var _this = _possibleConstructorReturn(this, (DogPack.__proto__ || Object.getPrototypeOf(DogPack)).call(this, props));
+
+        _this.playAudio = _this.playAudio.bind(_this);
+        _this.imagePromises = _this.imagePromises.bind(_this);
+
+        _this.state = {
+            loaded: false,
+            error: false
+        };
+        return _this;
+    }
+
+    _createClass(DogPack, [{
+        key: 'playAudio',
+        value: function playAudio() {
+            var audio = document.getElementById("audio");
+            audio.play().then(function () {
+                console.log("Woof!");
+            }).catch(function (error) {
+                console.error(error);
+            });
+        }
+    }, {
+        key: 'imagePromises',
+        value: function imagePromises(pics) {
+            var _this2 = this;
+
+            Promise.all(pics).then(function (clients) {
+                _this2.setState({
+                    loaded: true
+                });
+            }).catch(function () {
+                _this2.setState({
+                    error: true
+                });
+            });
+        }
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            if (nextProps.clients !== this.props.clients) {
+                var picLoads = nextProps.clients.map(function (client) {
+                    return new Promise(function (resolve, reject) {
+                        var img = new Image();
+
+                        img.onload = function () {
+                            return resolve(client);
+                        };
+
+                        img.onerror = function () {
+                            return resolve(client);
+                        };
+
+                        img.src = client.photoURL;
+                    });
+                });
+
+                this.imagePromises(picLoads);
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this3 = this;
+
+            if (this.state.error) {
+                return _react2.default.createElement(
+                    'p',
+                    null,
+                    'There was an error loading client images!'
+                );
+            } else if (!this.state.loaded) {
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'container' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'row' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-12' },
+                            _react2.default.createElement(
+                                'h1',
+                                { id: 'dogPackTitle' },
+                                'Dogstar Dog Pack'
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'row' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-11 offset-1' },
+                            _react2.default.createElement(
+                                'h3',
+                                { id: 'goToClient' },
+                                'Click on pack member for client info'
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'row' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-7' },
+                            _react2.default.createElement(
+                                'div',
+                                { id: 'dogPack' },
+                                _react2.default.createElement('audio', { id: 'audio', src: '/audio/single-dog-bark.wav' }),
+                                _react2.default.createElement('ul', null)
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-5' },
+                            _react2.default.createElement(
+                                'div',
+                                { id: 'infoForm' },
+                                _react2.default.createElement(
+                                    'h3',
+                                    { id: 'addUpdate' },
+                                    'Add or update a client'
+                                ),
+                                _react2.default.createElement(_ClientInfoForm2.default, { add: this.props.add, 'delete': this.props.delete, display: this.props.display, displayAll: this.props.displayAll })
+                            )
+                        )
+                    )
+                );
+            }
+            return _react2.default.createElement(
                 'div',
-                { className: 'col-12' },
-                _react2.default.createElement(
-                    'h1',
-                    { id: 'dogPackTitle' },
-                    'Dogstar Dog Pack'
-                )
-            )
-        ),
-        _react2.default.createElement(
-            'div',
-            { className: 'row' },
-            _react2.default.createElement(
-                'div',
-                { className: 'col-11 offset-1' },
-                _react2.default.createElement(
-                    'h3',
-                    { id: 'goToClient' },
-                    'Click on pack member for client info'
-                )
-            )
-        ),
-        _react2.default.createElement(
-            'div',
-            { className: 'row' },
-            _react2.default.createElement(
-                'div',
-                { className: 'col-7' },
+                { className: 'container' },
                 _react2.default.createElement(
                     'div',
-                    { id: 'dogPack' },
-                    _react2.default.createElement('audio', { id: 'audio', src: '/audio/single-dog-bark.wav' }),
+                    { className: 'row' },
                     _react2.default.createElement(
-                        'ul',
-                        null,
-                        props.clients.map(function (client, index) {
-                            return _react2.default.createElement(
-                                'li',
-                                { key: client._id },
-                                _react2.default.createElement(
-                                    _reactRouterDom.Link,
-                                    { to: '/client/' + index, onMouseDown: playAudio },
-                                    _react2.default.createElement(_DogPackPic2.default, { pic: client.photoURL, dogName: client.dogName })
-                                )
-                            );
-                        })
+                        'div',
+                        { className: 'col-12' },
+                        _react2.default.createElement(
+                            'h1',
+                            { id: 'dogPackTitle' },
+                            'Dogstar Dog Pack'
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col-11 offset-1' },
+                        _react2.default.createElement(
+                            'h3',
+                            { id: 'goToClient' },
+                            'Click on pack member for client info'
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col-7' },
+                        _react2.default.createElement(
+                            'div',
+                            { id: 'dogPack' },
+                            _react2.default.createElement('audio', { id: 'audio', src: '/audio/single-dog-bark.wav' }),
+                            _react2.default.createElement(
+                                'ul',
+                                null,
+                                this.props.clients.map(function (client, index) {
+                                    return _react2.default.createElement(
+                                        'li',
+                                        { key: client._id },
+                                        _react2.default.createElement(
+                                            _reactRouterDom.Link,
+                                            { to: '/client/' + index, onMouseDown: _this3.playAudio },
+                                            _react2.default.createElement(_DogPackPic2.default, { pic: client.photoURL, dogName: client.dogName })
+                                        )
+                                    );
+                                })
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col-5' },
+                        _react2.default.createElement(
+                            'div',
+                            { id: 'infoForm' },
+                            _react2.default.createElement(
+                                'h3',
+                                { id: 'addUpdate' },
+                                'Add or update a client'
+                            ),
+                            _react2.default.createElement(_ClientInfoForm2.default, { add: this.props.add, 'delete': this.props.delete, display: this.props.display, displayAll: this.props.displayAll })
+                        )
                     )
                 )
-            ),
-            _react2.default.createElement(
-                'div',
-                { className: 'col-5' },
-                _react2.default.createElement(
-                    'div',
-                    { id: 'infoForm' },
-                    _react2.default.createElement(
-                        'h3',
-                        { id: 'addUpdate' },
-                        'Add or update a client'
-                    ),
-                    _react2.default.createElement(_ClientInfoForm2.default, { add: props.add, 'delete': props.delete, display: props.display, displayAll: props.displayAll })
-                )
-            )
-        )
-    );
-};
+            );
+        }
+    }]);
+
+    return DogPack;
+}(_react.Component);
 
 exports.default = DogPack;
 
@@ -27011,13 +27150,11 @@ exports.default = DogPack;
 
 /* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/jeffbell/Desktop/Projects/dogstar-client-info-react/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/jeffbell/Desktop/Projects/dogstar-client-info-react/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(5);
 
@@ -27025,79 +27162,19 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var DogPackPic = function DogPackPic(props) {
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var DogPackPic = function (_Component) {
-    _inherits(DogPackPic, _Component);
-
-    function DogPackPic(props) {
-        _classCallCheck(this, DogPackPic);
-
-        var _this = _possibleConstructorReturn(this, (DogPackPic.__proto__ || Object.getPrototypeOf(DogPackPic)).call(this, props));
-
-        _this.state = {
-            loaded: false,
-            error: false
-        };
-        return _this;
-    }
-
-    _createClass(DogPackPic, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var _this2 = this;
-
-            var img = new Image();
-
-            img.onload = function () {
-                _this2.setState({
-                    loaded: true
-                });
-            };
-
-            img.onerror = function () {
-                _this2.setState({
-                    error: true
-                });
-            };
-
-            img.src = this.props.pic;
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            if (this.state.error) {
-                return _react2.default.createElement(
-                    'p',
-                    null,
-                    'Sorry!'
-                );
-            } else if (!this.state.loaded) {
-                return _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement('p', null)
-                );
-            }
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement('img', { src: this.props.pic, className: 'img-fluid', alt: 'Upload a picture!' }),
-                _react2.default.createElement(
-                    'p',
-                    { id: 'dogName' },
-                    this.props.dogName
-                )
-            );
-        }
-    }]);
-
-    return DogPackPic;
-}(_react.Component);
+    return _react2.default.createElement(
+        "div",
+        null,
+        _react2.default.createElement("img", { src: props.pic, className: "img-fluid", alt: "Upload a picture!" }),
+        _react2.default.createElement(
+            "p",
+            { id: "dogName" },
+            props.dogName
+        )
+    );
+};
 
 exports.default = DogPackPic;
 
