@@ -61,6 +61,14 @@ export default class DogPack extends Component {
         }
     }
 
+    componentDidMount() {
+        if(this.props.clients.length !== 0) {
+            this.setState({
+                loaded: true
+            })
+        }
+    }
+
     render() {
         if(this.state.error) {
             return <p>There was an error loading client images!</p>

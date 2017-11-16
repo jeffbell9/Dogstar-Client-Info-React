@@ -26992,6 +26992,15 @@ var DogPack = function (_Component) {
             }
         }
     }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            if (this.props.clients.length !== 0) {
+                this.setState({
+                    loaded: true
+                });
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this3 = this;
